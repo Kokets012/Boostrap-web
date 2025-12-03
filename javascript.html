@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Learning Hub - Interactive Tutorials</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- CodeMirror for code editing -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/theme/material-darker.min.css">
+    <style>
+        :root {
+            --js-yellow: #f7df1e;
+            --js-dark: #323330;
+            --js-blue: #61dafb;
+            --js-green: #4caf50;
+            --js-red: #f44336;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+        
+        .jumbotron {
+            background: linear-gradient(135deg, var(--js-dark) 0%, #000000 100%);
+            border: 2px solid var(--js-yellow);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(247, 223, 30, 0.1);
+        }
+        
+        .lesson-card {
+            border: 1px solid #333;
+            border-radius: 10px;
+            background-color: #252525;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            height: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(247, 223, 30, 0.15);
+            border-color: var(--js-yellow);
+        }
+        
+        .lesson-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--js-yellow);
+        }
+        
+        .code-editor-container {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            border: 1px solid #333;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .code-editor-header {
+            background-color: #252525;
+            padding: 10px 15px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .code-editor-body {
+            height: 250px;
+            overflow: auto;
+        }
+        
+        .CodeMirror {
+            height: 100%;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .output-console {
+            background-color: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 120px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #333;
+            margin-top: 15px;
+        }
+        
+        .output-console .log {
+            color: #00ff00;
+        }
+        
+        .output-console .error {
+            color: var(--js-red);
+        }
+        
+        .output-console .warn {
+            color: var(--js-yellow);
+        }
+        
+        .output-console .info {
+            color: var(--js-blue);
+        }
+        
+        .live-demo-area {
+            background-color: #252525;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 200px;
+        }
+        
+        .demo-controls {
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #333;
+        }
+        
+        .concept-table {
+            background-color: #252525;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .concept-table th {
+            background-color: #1e1e1e;
+            font-weight: 600;
+            border-color: #333;
+        }
+        
+        .concept-table td {
+            border-color: #333;
+        }
+        
+        .js-badge {
+            font-family: 'Courier New', monospace;
+            background-color: #333;
+            color: var(--js-yellow);
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+            font-size: 0.9rem;
+            border: 1px solid #444;
+        }
+        
+        .concept-preview {
+            background-color: #252525;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .checkpoint {
+            background-color: #2d2d2d;
+            border-left: 4px solid var(--js-yellow);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .tab-content {
+            padding-top: 20px;
+        }
+        
+        .highlight {
+            background-color: rgba(247, 223, 30, 0.1);
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: var(--js-yellow);
+        }
+        
+        footer {
+            background-color: #121212;
+            color: #aaa;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 2px solid var(--js-dark);
+        }
+        
+        .snippet-toggle {
+            background-color: #333;
+            color: white;
+            border: 1px solid #444;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .snippet-toggle:hover {
+            background-color: #444;
+            border-color: var(--js-yellow);
+        }
+        
+        .progress-section {
+            background-color: #252525;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+        
+        .lesson-complete {
+            border-left: 4px solid var(--js-green);
+        }
+        
+        .completion-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--js-green);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .nav-tabs .nav-link {
+            background-color: #252525;
+            color: #aaa;
+            border: 1px solid #333;
+            margin-right: 5px;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background-color: #1a1a1a;
+            color: var(--js-yellow);
+            border-bottom-color: #1a1a1a;
+            font-weight: bold;
+        }
+        
+        .nav-tabs {
+            border-bottom: 1px solid #333;
+        }
+        
+        .btn-primary {
+            background-color: var(--js-yellow);
+            border-color: var(--js-yellow);
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            background-color: #e6ca0d;
+            border-color: #e6ca0d;
+            color: #000;
+        }
+        
+        .btn-outline-primary {
+            border-color: var(--js-yellow);
+            color: var(--js-yellow);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--js-yellow);
+            color: #000;
+        }
+        
+        .form-control, .form-select {
+            background-color: #252525;
+            border: 1px solid #444;
+            color: #f0f0f0;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: #252525;
+            border-color: var(--js-yellow);
+            color: #f0f0f0;
+            box-shadow: 0 0 0 0.25rem rgba(247, 223, 30, 0.25);
+        }
+        
+        .card {
+            background-color: #252525;
+            border: 1px solid #333;
+            color: #f0f0f0;
+        }
+        
+        .card-header {
+            background-color: #1e1e1e;
+            border-bottom: 1px solid #333;
+            color: #f0f0f0;
+        }
+        
+        .progress {
+            background-color: #333;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #f0f0f0;
+        }
+        
+        .text-primary {
+            color: var(--js-yellow) !important;
+        }
+        
+        .border-primary {
+            border-color: var(--js-yellow) !important;
+        }
+        
+        .bg-primary {
+            background-color: var(--js-yellow) !important;
+            color: #000 !important;
+        }
+        
+        .alert-success {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-color: var(--js-green);
+            color: #d4edda;
+        }
+        
+        .table {
+            color: #f0f0f0;
+        }
+        
+        .form-range::-webkit-slider-thumb {
+            background-color: var(--js-yellow);
+        }
+        
+        .form-range::-moz-range-thumb {
+            background-color: var(--js-yellow);
+        }
+        
+        .js-logo {
+            color: var(--js-yellow);
+            text-shadow: 0 0 10px rgba(247, 223, 30, 0.5);
+        }
+        
+        .function-visualizer {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #333;
+        }
+        
+        .visualization-area {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .execution-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .stack-item {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid var(--js-blue);
+            transition: all 0.3s;
+        }
+        
+        .stack-item.active {
+            background-color: rgba(97, 218, 251, 0.1);
+            border-left-color: var(--js-yellow);
+        }
+        
+        .variable-watch {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #333;
+        }
+        
+        .watch-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .watch-item:last-child {
+            border-bottom: none;
+        }
+        
+        .watch-name {
+            color: var(--js-blue);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .watch-value {
+            color: var(--js-green);
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="text-center mb-5">
+            <h1 class="display-4 fw-bold js-logo">JavaScript Learning Hub</h1>
+            <p class="lead">Interactive tutorials with live code execution & comprehensive JavaScript reference</p>
+            <div class="progress" style="height: 8px; max-width: 500px; margin: 0 auto;">
+                <div id="learningProgress" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <p class="mt-2 text-muted"><span id="progressText">0% Complete</span> - Start learning JavaScript!</p>
+        </header>
+        
+        <!-- Introduction -->
+        <div class="jumbotron">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2 class="display-6">Live Code Execution</h2>
+                    <p class="lead">Write and run JavaScript code directly in your browser. See results instantly in the interactive console.</p>
+                    <p>Each concept includes editable examples you can modify and execute to deepen your understanding.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="bi bi-terminal" style="font-size: 8rem; color: var(--js-yellow); opacity: 0.8;"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lesson Progress Cards -->
+        <div class="progress-section">
+            <h3 class="mb-4">JavaScript Learning Path <small class="text-muted" id="lessonsCompleted">0/6 lessons completed</small></h3>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard1">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-journal-code"></i>
+                            </div>
+                            <h5 class="card-title">Variables & Data Types</h5>
+                            <p class="card-text">Learn let, const, strings, numbers, booleans, and more.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-fundamentals'); startLesson(1);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard2">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-diagram-3"></i>
+                            </div>
+                            <h5 class="card-title">Functions & Scope</h5>
+                            <p class="card-text">Master function declarations, expressions, and scope.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-fundamentals'); startLesson(2);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard3">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </div>
+                            <h5 class="card-title">Control Flow</h5>
+                            <p class="card-text">If/else, loops, switch statements, and conditional logic.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-fundamentals'); startLesson(3);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard4">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-boxes"></i>
+                            </div>
+                            <h5 class="card-title">Arrays & Objects</h5>
+                            <p class="card-text">Working with complex data structures in JavaScript.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-datastructures'); startLesson(4);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard5">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-tools"></i>
+                            </div>
+                            <h5 class="card-title">DOM Manipulation</h5>
+                            <p class="card-text">Interact with HTML elements and handle events.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-dom'); startLesson(5);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard6">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-puzzle"></i>
+                            </div>
+                            <h5 class="card-title">Modern JS (ES6+)</h5>
+                            <p class="card-text">Arrow functions, destructuring, promises, async/await.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-es6'); startLesson(6);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <button class="btn btn-success" onclick="completeAllLessons()">Mark All Complete</button>
+                <button class="btn btn-outline-secondary ms-2" onclick="resetProgress()">Reset Progress</button>
+            </div>
+        </div>
+        
+        <!-- Navigation Tabs -->
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-fundamentals-tab" data-bs-toggle="tab" data-bs-target="#nav-fundamentals" type="button">Fundamentals</button>
+                <button class="nav-link" id="nav-datastructures-tab" data-bs-toggle="tab" data-bs-target="#nav-datastructures" type="button">Data Structures</button>
+                <button class="nav-link" id="nav-dom-tab" data-bs-toggle="tab" data-bs-target="#nav-dom" type="button">DOM & Events</button>
+                <button class="nav-link" id="nav-es6-tab" data-bs-toggle="tab" data-bs-target="#nav-es6" type="button">Modern JavaScript</button>
+                <button class="nav-link" id="nav-practice-tab" data-bs-toggle="tab" data-bs-target="#nav-practice" type="button">Practice</button>
+            </div>
+        </nav>
+        
+        <!-- Tab Content -->
+        <div class="tab-content" id="nav-tabContent">
+            <!-- Fundamentals Tab -->
+            <div class="tab-pane fade show active" id="nav-fundamentals">
+                <div class="mt-4">
+                    <h3 class="mb-4">JavaScript Fundamentals</h3>
+                    <p class="mb-4">Learn the building blocks of JavaScript with interactive code examples.</p>
+                    
+                    <!-- Demo 1: Variables & Data Types -->
+                    <div class="card mb-4" id="demo1Section">
+                        <div class="card-header bg-primary text-dark d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Lesson 1: Variables & Data Types</h4>
+                            <button class="btn btn-sm btn-dark" onclick="completeLesson(1)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <p>JavaScript variables are declared using <code>let</code>, <code>const</code>, or <code>var</code>. Each has different use cases.</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Live Code Editor:</h5>
+                                    <div class="code-editor-container">
+                                        <div class="code-editor-header">
+                                            <span>variables.js</span>
+                                            <button class="btn btn-sm btn-primary" onclick="runCode('variablesEditor')">Run Code <i class="bi bi-play-fill"></i></button>
+                                        </div>
+                                        <div class="code-editor-body">
+                                            <textarea id="variablesEditor">// Variables in JavaScript
+// Try changing these values and run the code!
+
+let message = "Hello, JavaScript!";
+const pi = 3.14159;
+var oldWay = "I'm the old var keyword";
+
+// Different data types
+let number = 42;
+let float = 3.14;
+let bool = true;
+let array = [1, 2, 3];
+let object = { name: "John", age: 30 };
+let nothing = null;
+let notDefined;
+
+// Log all variables to console
+console.log("Message:", message);
+console.log("PI constant:", pi);
+console.log("Number:", number);
+console.log("Boolean:", bool);
+console.log("Array:", array);
+console.log("Object:", object);
+
+// Try to change a const (this will cause an error)
+// pi = 3.14; // Uncomment this line to see the error</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Console Output:</h5>
+                                    <div class="output-console" id="variablesOutput">
+                                        <div class="log">Output will appear here...</div>
+                                    </div>
+                                    
+                                    <div class="demo-controls mt-3">
+                                        <h6>Quick Examples:</h6>
+                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="setExample('variablesEditor', 'letExample')">let Example</button>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="setExample('variablesEditor', 'constExample')">const Example</button>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="setExample('variablesEditor', 'typeExample')">Type Checking</button>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showAdvancedTypes">
+                                            <label class="form-check-label" for="showAdvancedTypes">Show advanced data types</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="checkpoint mt-3">
+                                <h6><i class="bi bi-lightbulb text-warning"></i> Key Concepts:</h6>
+                                <ul>
+                                    <li><code>let</code>: Block-scoped variable that can be reassigned</li>
+                                    <li><code>const</code>: Block-scoped variable that cannot be reassigned (constant)</li>
+                                    <li><code>var</code>: Function-scoped variable (older way, avoid in modern code)</li>
+                                    <li>JavaScript has dynamic typing - variables can hold any type of value</li>
+                                    <li>Primitive types: string, number, boolean, null, undefined, symbol, bigint</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Demo 2: Functions -->
+                    <div class="card mb-4" id="demo2Section">
+                        <div class="card-header bg-primary text-dark d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Lesson 2: Functions & Scope</h4>
+                            <button class="btn btn-sm btn-dark" onclick="completeLesson(2)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <p>Functions are reusable blocks of code. JavaScript has function declarations, expressions, and arrow functions.</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Live Code Editor:</h5>
+                                    <div class="code-editor-container">
+                                        <div class="code-editor-header">
+                                            <span>functions.js</span>
+                                            <button class="btn btn-sm btn-primary" onclick="runCode('functionsEditor')">Run Code <i class="bi bi-play-fill"></i></button>
+                                        </div>
+                                        <div class="code-editor-body">
+                                            <textarea id="functionsEditor">// Different ways to define functions
+
+// Function declaration (hoisted)
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+// Function expression
+const add = function(a, b) {
+    return a + b;
+};
+
+// Arrow function (ES6+)
+const multiply = (a, b) => a * b;
+
+// Function with default parameters
+function calculatePrice(price, tax = 0.08, discount = 0) {
+    return price * (1 + tax) - discount;
+}
+
+// Testing the functions
+console.log(greet("Alice"));
+console.log("5 + 3 =", add(5, 3));
+console.log("5 * 3 =", multiply(5, 3));
+console.log("Price: $100, Tax: 8%, Discount: $10 = $", calculatePrice(100, 0.08, 10));
+
+// Scope example
+let globalVar = "I'm global";
+
+function scopeDemo() {
+    let localVar = "I'm local";
+    console.log("Inside function - globalVar:", globalVar);
+    console.log("Inside function - localVar:", localVar);
+    
+    // Block scope with let/const
+    if (true) {
+        let blockScoped = "I'm block scoped";
+        var functionScoped = "I'm function scoped (var)";
+        console.log("Inside block - blockScoped:", blockScoped);
+    }
+    
+    // console.log("Outside block - blockScoped:", blockScoped); // Error!
+    console.log("Outside block - functionScoped:", functionScoped); // Works with var
+}
+
+scopeDemo();
+// console.log("Outside function - localVar:", localVar); // Error!</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Console Output:</h5>
+                                    <div class="output-console" id="functionsOutput">
+                                        <div class="log">Output will appear here...</div>
+                                    </div>
+                                    
+                                    <div class="function-visualizer mt-3">
+                                        <h6>Function Execution Visualization:</h6>
+                                        <div class="execution-stack" id="executionStack">
+                                            <div class="stack-item">Global Execution Context</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary mt-2" onclick="visualizeFunctionCall()">Step Through Function Call</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Demo 3: Control Flow -->
+                    <div class="card mb-4" id="demo3Section">
+                        <div class="card-header bg-primary text-dark d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Lesson 3: Control Flow</h4>
+                            <button class="btn btn-sm btn-dark" onclick="completeLesson(3)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <p>Control flow statements determine the order in which code executes.</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="demo-controls mb-3">
+                                        <h6>Control Flow Simulator:</h6>
+                                        <div class="mb-2">
+                                            <label class="form-label">Temperature: <span id="tempValue">25</span>°C</label>
+                                            <input type="range" class="form-range" id="tempSlider" min="-10" max="40" value="25" oninput="updateControlFlow()">
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label">Time of Day:</label>
+                                            <select class="form-select" id="timeOfDay" onchange="updateControlFlow()">
+                                                <option value="morning">Morning</option>
+                                                <option value="afternoon">Afternoon</option>
+                                                <option value="evening">Evening</option>
+                                                <option value="night">Night</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="isRaining" onchange="updateControlFlow()">
+                                            <label class="form-check-label" for="isRaining">Is it raining?</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <h5>Conditional Logic:</h5>
+                                    <div class="code-example" style="background-color: #1e1e1e; border-left: 4px solid var(--js-blue); padding: 15px; border-radius: 0 5px 5px 0;">
+                                        <pre id="controlFlowCode"><code>let temperature = <span id="codeTemp">25</span>;
+let time = "<span id="codeTime">afternoon</span>";
+let raining = <span id="codeRaining">false</span>;
+
+if (temperature > 30) {
+    console.log("It's hot! Stay hydrated.");
+} else if (temperature > 20) {
+    console.log("Nice weather!");
+} else if (temperature > 10) {
+    console.log("A bit chilly.");
+} else {
+    console.log("It's cold! Wear a jacket.");
+}
+
+switch(time) {
+    case "morning":
+        console.log("Good morning!");
+        break;
+    case "afternoon":
+        console.log("Good afternoon!");
+        break;
+    case "evening":
+        console.log("Good evening!");
+        break;
+    default:
+        console.log("Good night!");
+}
+
+// Ternary operator
+let activity = raining ? "Stay inside" : "Go outside";
+console.log(`Suggestion: ${activity}`);
+
+// Loops
+console.log("Counting from 1 to 3:");
+for (let i = 1; i <= 3; i++) {
+    console.log(i);
+}</code></pre>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Console Output:</h5>
+                                    <div class="output-console" id="controlFlowOutput">
+                                        <div class="log" id="flowOutputText">Adjust the controls to see different outputs...</div>
+                                    </div>
+                                    
+                                    <div class="checkpoint mt-3">
+                                        <h6><i class="bi bi-lightbulb text-warning"></i> Control Flow Statements:</h6>
+                                        <ul>
+                                            <li><code>if/else if/else</code>: Conditional branching</li>
+                                            <li><code>switch</code>: Multi-way branching based on a value</li>
+                                            <li><code>for</code>: Loop with initialization, condition, and increment</li>
+                                            <li><code>while</code>: Loop that runs while condition is true</li>
+                                            <li><code>do...while</code>: Loop that runs at least once</li>
+                                            <li><code>break</code>: Exit a loop or switch</li>
+                                            <li><code>continue</code>: Skip to next iteration of a loop</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Structures Tab -->
+            <div class="tab-pane fade" id="nav-datastructures">
+                <div class="mt-4">
+                    <h3 class="mb-4">Arrays & Objects</h3>
+                    <p class="mb-4">Learn to work with JavaScript's primary data structures.</p>
+                    
+                    <div class="card mb-4" id="demo4Section">
+                        <div class="card-header bg-primary text-dark d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Lesson 4: Arrays & Objects</h4>
+                            <button class="btn btn-sm btn-dark" onclick="completeLesson(4)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Interactive Array Methods:</h5>
+                                    <div class="demo-controls mb-3">
+                                        <div class="mb-3">
+                                            <label class="form-label">Array Operations:</label>
+                                            <select class="form-select" id="arrayOperation" onchange="demoArrayOperation()">
+                                                <option value="map">map() - Transform each element</option>
+                                                <option value="filter">filter() - Filter elements</option>
+                                                <option value="reduce">reduce() - Reduce to a single value</option>
+                                                <option value="find">find() - Find first matching element</option>
+                                                <option value="sort">sort() - Sort array</option>
+                                                <option value="slice">slice() - Extract portion</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Sample Array:</label>
+                                            <div class="d-flex flex-wrap gap-1 mb-2" id="arrayVisualization">
+                                                <span class="badge bg-secondary">5</span>
+                                                <span class="badge bg-secondary">12</span>
+                                                <span class="badge bg-secondary">8</span>
+                                                <span class="badge bg-secondary">3</span>
+                                                <span class="badge bg-secondary">20</span>
+                                                <span class="badge bg-secondary">1</span>
+                                                <span class="badge bg-secondary">15</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="variable-watch">
+                                        <h6>Array Transformation:</h6>
+                                        <div id="arrayTransformation">
+                                            <div class="watch-item">
+                                                <span class="watch-name">Original Array:</span>
+                                                <span class="watch-value" id="originalArray">[5, 12, 8, 3, 20, 1, 15]</span>
+                                            </div>
+                                            <div class="watch-item">
+                                                <span class="watch-name">Operation:</span>
+                                                <span class="watch-value" id="currentOperation">map(x => x * 2)</span>
+                                            </div>
+                                            <div class="watch-item">
+                                                <span class="watch-name">Result:</span>
+                                                <span class="watch-value" id="operationResult">[10, 24, 16, 6, 40, 2, 30]</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h5>Objects in JavaScript:</h5>
+                                    <div class="code-editor-container" style="height: 300px;">
+                                        <div class="code-editor-header">
+                                            <span>objects.js</span>
+                                            <button class="btn btn-sm btn-primary" onclick="runCode('objectsEditor')">Run Code <i class="bi bi-play-fill"></i></button>
+                                        </div>
+                                        <div class="code-editor-body">
+                                            <textarea id="objectsEditor">// Object literal
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 30,
+    isStudent: false,
+    hobbies: ["reading", "gaming", "hiking"],
+    
+    // Method (function in object)
+    getFullName: function() {
+        return `${this.firstName} ${this.lastName}`;
+    },
+    
+    // ES6 method shorthand
+    greet() {
+        console.log(`Hello, my name is ${this.getFullName()}`);
+    }
+};
+
+// Accessing properties
+console.log("First name:", person.firstName);
+console.log("Age:", person["age"]);
+console.log("Full name:", person.getFullName());
+
+// Adding properties
+person.email = "john.doe@example.com";
+console.log("Email:", person.email);
+
+// Object iteration
+console.log("\nAll properties:");
+for (let key in person) {
+    if (typeof person[key] !== 'function') {
+        console.log(`${key}: ${person[key]}`);
+    }
+}
+
+// Object.keys, Object.values, Object.entries
+console.log("\nKeys:", Object.keys(person));
+console.log("Values:", Object.values(person).slice(0, 5));
+
+// Nested objects
+const library = {
+    name: "City Library",
+    books: [
+        { title: "JavaScript Guide", author: "A. Developer", pages: 300 },
+        { title: "Clean Code", author: "R. Martin", pages: 450 },
+        { title: "Deep Work", author: "C. Newport", pages: 280 }
+    ],
+    
+    // Method to find a book
+    findBook(title) {
+        return this.books.find(book => book.title === title);
+    }
+};
+
+console.log("\nFinding 'Clean Code':", library.findBook("Clean Code"));</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="output-console mt-3" id="objectsOutput" style="height: 150px;">
+                                <div class="log">Object output will appear here...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DOM & Events Tab -->
+            <div class="tab-pane fade" id="nav-dom">
+                <div class="mt-4">
+                    <h3 class="mb-4">DOM Manipulation & Event Handling</h3>
+                    <p class="mb-4">Learn how JavaScript interacts with HTML elements and responds to user actions.</p>
+                    
+                    <div class="card mb-4" id="demo5Section">
+                        <div class="card-header bg-primary text-dark d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Lesson 5: DOM Manipulation</h4>
+                            <button class="btn btn-sm btn-dark" onclick="completeLesson(5)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <h5>Live DOM Playground:</h5>
+                                    <div id="domPlayground" class="live-demo-area">
+                                        <div id="targetElement" class="p-3 mb-3 border rounded" style="background-color: #2d2d2d;">
+                                            <h6>Target Element</h6>
+                                            <p id="elementText">This element can be modified with JavaScript</p>
+                                            <button id="demoButton" class="btn btn-sm btn-primary">Click Me!</button>
+                                        </div>
+                                        <div id="dynamicContent"></div>
+                                    </div>
+                                    
+                                    <div class="demo-controls mt-3">
+                                        <h6>DOM Controls:</h6>
+                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="domAction('changeText')">Change Text</button>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="domAction('changeColor')">Change Color</button>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="domAction('addElement')">Add Element</button>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="domAction('toggleVisibility')">Toggle Visibility</button>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="domAction('reset')">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-7">
+                                    <h5>DOM Manipulation Code:</h5>
+                                    <div class="code-editor-container" style="height: 350px;">
+                                        <div class="code-editor-header">
+                                            <span>dom-manipulation.js</span>
+                                            <button class="btn btn-sm btn-primary" onclick="runDOMCode()">Execute DOM Code <i class="bi bi-play-fill"></i></button>
+                                        </div>
+                                        <div class="code-editor-body">
+                                            <textarea id="domEditor">// DOM Selection Methods
+const targetEl = document.getElementById('targetElement');
+const button = document.querySelector('#demoButton');
+const allParagraphs = document.querySelectorAll('p');
+
+// Modify element content
+targetEl.innerHTML += '<div class="text-success mt-2">New content added!</div>';
+
+// Change styles
+targetEl.style.backgroundColor = '#3d2d5c';
+targetEl.style.color = 'white';
+targetEl.style.padding = '20px';
+targetEl.style.borderRadius = '10px';
+
+// Add/remove CSS classes
+targetEl.classList.add('highlight');
+// targetEl.classList.remove('border');
+
+// Create new elements
+const newDiv = document.createElement('div');
+newDiv.className = 'alert alert-info mt-3';
+newDiv.textContent = 'This element was created with JavaScript!';
+document.getElementById('dynamicContent').appendChild(newDiv);
+
+// Event handling
+let clickCount = 0;
+button.addEventListener('click', function() {
+    clickCount++;
+    this.textContent = `Clicked ${clickCount} time(s)`;
+    this.classList.toggle('btn-primary');
+    this.classList.toggle('btn-success');
+    
+    // Show notification
+    const notification = document.createElement('div');
+    notification.className = 'alert alert-warning alert-dismissible fade show mt-2';
+    notification.innerHTML = `
+        Button clicked! <button type="button" class="btn-close btn-close-white" onclick="this.parentElement.remove()"></button>
+    `;
+    document.getElementById('dynamicContent').appendChild(notification);
+});
+
+// Form handling example
+const form = document.createElement('form');
+form.className = 'mt-3 p-3 border rounded';
+form.innerHTML = `
+    <div class="mb-2">
+        <label class="form-label">Enter text:</label>
+        <input type="text" class="form-control" id="userInput">
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+`;
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const userInput = document.getElementById('userInput').value;
+    alert(`You entered: ${userInput}`);
+});
+
+document.getElementById('dynamicContent').appendChild(form);</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="checkpoint mt-3">
+                                <h6><i class="bi bi-lightbulb text-warning"></i> Key DOM Concepts:</h6>
+                                <ul>
+                                    <li><code>document.getElementById()</code> - Select element by ID</li>
+                                    <li><code>document.querySelector()</code> - Select first matching element</li>
+                                    <li><code>document.querySelectorAll()</code> - Select all matching elements</li>
+                                    <li><code>element.innerHTML</code> - Get/set HTML content</li>
+                                    <li><code>element.textContent</code> - Get/set text content</li>
+                                    <li><code>element.style</code> - Modify CSS styles</li>
+                                    <li><code>element.classList</code> - Add/remove CSS classes</li>
+                                    <li><code>document.createElement()</code> - Create new elements</li>
+                                    <li><code>element.addEventListener()</code> - Handle events</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modern JavaScript Tab -->
+            <div class="tab-pane fade" id="nav-es6">
+                <div class="mt-4">
+                    <h3 class="mb-4">Modern JavaScript (ES6+)</h3>
+                    <p class="mb-4">Learn the latest JavaScript features that make coding more efficient and expressive.</p>
+                    
+                    <div class="card mb-4" id="demo6Section">
+                        <div class="card-header bg-primary text-dark d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Lesson 6: ES6+ Features</h4>
+                            <button class="btn btn-sm btn-dark" onclick="completeLesson(6)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Modern JavaScript Features:</h5>
+                                    <div class="demo-controls mb-3">
+                                        <div class="mb-3">
+                                            <label class="form-label">Select ES6+ Feature:</label>
+                                            <select class="form-select" id="es6Feature" onchange="showES6Example()">
+                                                <option value="arrow">Arrow Functions</option>
+                                                <option value="destructure">Destructuring</option>
+                                                <option value="spread">Spread & Rest Operators</option>
+                                                <option value="template">Template Literals</option>
+                                                <option value="modules">Modules (import/export)</option>
+                                                <option value="promises">Promises & Async/Await</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="es6Example">
+                                        <div class="code-example" style="background-color: #1e1e1e; border-left: 4px solid var(--js-green); padding: 15px; border-radius: 0 5px 5px 0;">
+                                            <pre id="es6Code"><code>// Arrow Functions
+// Concise syntax and lexical 'this'
+
+// Traditional function
+function add(a, b) {
+    return a + b;
+}
+
+// Arrow function equivalent
+const addArrow = (a, b) => a + b;
+
+// Single parameter, no parentheses needed
+const square = x => x * x;
+
+// No parameters
+const greet = () => "Hello!";
+
+// Multiple statements
+const complex = (x, y) => {
+    const sum = x + y;
+    return sum * 2;
+};
+
+// Arrow functions don't have their own 'this'
+const person = {
+    name: "John",
+    traditional: function() {
+        console.log(this.name); // 'this' refers to person
+    },
+    arrow: () => {
+        console.log(this.name); // 'this' refers to outer scope (global/window)
+    }
+};
+
+console.log("Add 5 + 3:", addArrow(5, 3));
+console.log("Square 4:", square(4));</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h5>Try It Live:</h5>
+                                    <div class="code-editor-container" style="height: 300px;">
+                                        <div class="code-editor-header">
+                                            <span>es6-features.js</span>
+                                            <button class="btn btn-sm btn-primary" onclick="runCode('es6Editor')">Run Code <i class="bi bi-play-fill"></i></button>
+                                        </div>
+                                        <div class="code-editor-body">
+                                            <textarea id="es6Editor">// Destructuring - unpack values from arrays or objects
+const person = { name: "Alice", age: 30, city: "New York" };
+
+// Object destructuring
+const { name, age } = person;
+console.log(`Name: ${name}, Age: ${age}`);
+
+// Array destructuring
+const colors = ["red", "green", "blue"];
+const [firstColor, secondColor] = colors;
+console.log(`First: ${firstColor}, Second: ${secondColor}`);
+
+// Spread operator (...)
+const numbers = [1, 2, 3];
+const moreNumbers = [...numbers, 4, 5, 6];
+console.log("Spread array:", moreNumbers);
+
+// Rest operator (...)
+const sum = (...args) => args.reduce((total, num) => total + num, 0);
+console.log("Sum of 1,2,3,4,5:", sum(1, 2, 3, 4, 5));
+
+// Template literals (backticks)
+const product = "JavaScript Course";
+const price = 49.99;
+const message = `The ${product} costs $${price}. 
+That's a great deal!`;
+console.log(message);
+
+// Try adding your own ES6+ code below:
+// Example: Try using array destructuring with rest operator
+const [first, ...rest] = [10, 20, 30, 40];
+console.log("First:", first, "Rest:", rest);</textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="output-console mt-3" id="es6Output" style="height: 150px;">
+                                        <div class="log">ES6+ output will appear here...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Practice Tab -->
+            <div class="tab-pane fade" id="nav-practice">
+                <div class="mt-4">
+                    <h3 class="mb-4">Practice Exercises</h3>
+                    <p class="mb-4">Test your JavaScript knowledge with interactive coding challenges.</p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-dark">
+                            <h4 class="mb-0">Coding Challenges</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <h5>Challenge 1: FizzBuzz</h5>
+                                        <p>Write a function that prints numbers from 1 to 100. For multiples of 3, print "Fizz" instead. For multiples of 5, print "Buzz". For multiples of both, print "FizzBuzz".</p>
+                                        <div class="code-editor-container" style="height: 200px;">
+                                            <div class="code-editor-header">
+                                                <span>fizzbuzz.js</span>
+                                                <button class="btn btn-sm btn-primary" onclick="runCode('challenge1Editor')">Test Solution</button>
+                                            </div>
+                                            <div class="code-editor-body">
+                                                <textarea id="challenge1Editor">function fizzBuzz() {
+    // Your solution here
+    for (let i = 1; i <= 100; i++) {
+        if (i % 3 === 0 && i % 5 === 0) {
+            console.log("FizzBuzz");
+        } else if (i % 3 === 0) {
+            console.log("Fizz");
+        } else if (i % 5 === 0) {
+            console.log("Buzz");
+        } else {
+            console.log(i);
+        }
+    }
+}
+
+fizzBuzz();</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="output-console mt-2" id="challenge1Output" style="height: 150px; font-size: 0.8rem;">
+                                            <div class="log">Output will appear here...</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary mt-2" onclick="showSolution('challenge1')">Show Solution</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <h5>Challenge 2: Array Manipulation</h5>
+                                        <p>Given an array of numbers, return a new array with only the even numbers doubled.</p>
+                                        <div class="code-editor-container" style="height: 200px;">
+                                            <div class="code-editor-header">
+                                                <span>array-challenge.js</span>
+                                                <button class="btn btn-sm btn-primary" onclick="runCode('challenge2Editor')">Test Solution</button>
+                                            </div>
+                                            <div class="code-editor-body">
+                                                <textarea id="challenge2Editor">const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+function doubleEvenNumbers(arr) {
+    // Your solution here
+    return arr.filter(num => num % 2 === 0).map(num => num * 2);
+}
+
+const result = doubleEvenNumbers(numbers);
+console.log("Original array:", numbers);
+console.log("Even numbers doubled:", result);
+console.log("Expected: [4, 8, 12, 16, 20]");</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="output-console mt-2" id="challenge2Output" style="height: 150px;">
+                                            <div class="log">Output will appear here...</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary mt-2" onclick="showSolution('challenge2')">Show Solution</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-4">
+                                        <h5>Challenge 3: Build a Counter App</h5>
+                                        <p>Create a simple counter with increment, decrement, and reset functionality.</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="code-editor-container" style="height: 250px;">
+                                                    <div class="code-editor-header">
+                                                        <span>counter-app.js</span>
+                                                        <button class="btn btn-sm btn-primary" onclick="runCode('challenge3Editor')">Run Counter App</button>
+                                                    </div>
+                                                    <div class="code-editor-body">
+                                                        <textarea id="challenge3Editor">// Counter application
+let count = 0;
+
+// DOM elements (simulated)
+const counterElement = { textContent: "" };
+const buttons = {
+    increment: { addEventListener: function(event, handler) { this.handler = handler; } },
+    decrement: { addEventListener: function(event, handler) { this.handler = handler; } },
+    reset: { addEventListener: function(event, handler) { this.handler = handler; } }
+};
+
+// Update counter display
+function updateCounter() {
+    counterElement.textContent = `Count: ${count}`;
+    console.log(counterElement.textContent);
+}
+
+// Event handlers
+function increment() {
+    count++;
+    updateCounter();
+}
+
+function decrement() {
+    count--;
+    updateCounter();
+}
+
+function reset() {
+    count = 0;
+    updateCounter();
+}
+
+// Simulate button clicks
+console.log("Counter App Started");
+console.log("Try calling increment(), decrement(), or reset() in the console");
+console.log("Or click the simulated buttons below:");
+
+// Make functions available globally
+window.increment = increment;
+window.decrement = decrement;
+window.reset = reset;
+
+updateCounter();</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="live-demo-area">
+                                                    <h6>Counter App Demo</h6>
+                                                    <div class="text-center my-4">
+                                                        <h2 id="counterDisplay">Count: 0</h2>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center gap-3">
+                                                        <button class="btn btn-danger" onclick="decrementCounter()">- Decrement</button>
+                                                        <button class="btn btn-secondary" onclick="resetCounter()">Reset</button>
+                                                        <button class="btn btn-success" onclick="incrementCounter()">+ Increment</button>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <p class="small text-muted">Try modifying the code to add features like:</p>
+                                                        <ul class="small text-muted">
+                                                            <li>Maximum/minimum limits</li>
+                                                            <li>Step size customization</li>
+                                                            <li>Persist count between page reloads</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>JavaScript Learning Hub</h5>
+                    <p>Interactive tutorials with live code execution & comprehensive JavaScript reference.</p>
+                    <p class="text-muted mb-0">Progress: <span id="footerProgress">0%</span> complete</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Created with <i class="bi bi-heart-fill text-danger"></i> for JavaScript learners</p>
+                    <div class="mt-2">
+                        <button class="btn btn-outline-light btn-sm me-2" onclick="showTab('nav-fundamentals')">Fundamentals</button>
+                        <button class="btn btn-outline-light btn-sm me-2" onclick="showTab('nav-datastructures')">Data Structures</button>
+                        <button class="btn btn-outline-light btn-sm me-2" onclick="showTab('nav-dom')">DOM & Events</button>
+                        <button class="btn btn-outline-light btn-sm" onclick="showTab('nav-practice')">Practice</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- CodeMirror -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/addon/edit/matchbrackets.min.js"></script>
+    
+    <script>
+        // Track completed lessons
+        let completedLessons = [];
+        const totalLessons = 6;
+        
+        // CodeMirror editors
+        let editors = {};
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load progress from localStorage if available
+            const savedProgress = localStorage.getItem('jsProgress');
+            if (savedProgress) {
+                completedLessons = JSON.parse(savedProgress);
+            }
+            
+            updateProgress();
+            
+            // Initialize CodeMirror editors
+            initCodeEditors();
+            
+            // Set up interactive demos
+            setupControlFlowDemo();
+            setupArrayDemo();
+            setupDOMDemo();
+            setupES6Demo();
+            
+            // Mark first lesson as started
+            if (completedLessons.length === 0) {
+                startLesson(1);
+            }
+            
+            // Initialize counter
+            updateCounterDisplay();
+        });
+        
+        // Initialize CodeMirror editors
+        function initCodeEditors() {
+            const editorIds = [
+                'variablesEditor', 'functionsEditor', 'objectsEditor', 
+                'domEditor', 'es6Editor', 'challenge1Editor', 
+                'challenge2Editor', 'challenge3Editor'
+            ];
+            
+            editorIds.forEach(id => {
+                editors[id] = CodeMirror.fromTextArea(document.getElementById(id), {
+                    lineNumbers: true,
+                    mode: 'javascript',
+                    theme: 'material-darker',
+                    matchBrackets: true,
+                    lineWrapping: true,
+                    indentUnit: 2,
+                    tabSize: 2
+                });
+            });
+        }
+        
+        // Start a lesson
+        function startLesson(lessonNumber) {
+            // Mark lesson card as active
+            const lessonCard = document.getElementById(`lessonCard${lessonNumber}`);
+            if (lessonCard) {
+                lessonCard.classList.add('border-primary');
+                lessonCard.classList.add('border-2');
+            }
+        }
+        
+        // Complete a lesson
+        function completeLesson(lessonNumber) {
+            if (!completedLessons.includes(lessonNumber)) {
+                completedLessons.push(lessonNumber);
+                
+                // Update UI for this lesson
+                const lessonCard = document.getElementById(`lessonCard${lessonNumber}`);
+                if (lessonCard) {
+                    lessonCard.classList.remove('border-primary');
+                    lessonCard.classList.add('border-success');
+                    lessonCard.classList.add('border-2');
+                    lessonCard.classList.add('lesson-complete');
+                    
+                    // Add checkmark badge
+                    if (!lessonCard.querySelector('.completion-badge')) {
+                        const badge = document.createElement('div');
+                        badge.className = 'completion-badge';
+                        badge.innerHTML = '<i class="bi bi-check"></i>';
+                        lessonCard.style.position = 'relative';
+                        lessonCard.appendChild(badge);
+                    }
+                }
+                
+                // Update progress
+                updateProgress();
+                
+                // Save to localStorage
+                localStorage.setItem('jsProgress', JSON.stringify(completedLessons));
+                
+                // Show notification
+                showNotification(`Lesson ${lessonNumber} completed!`);
+            }
+        }
+        
+        // Complete all lessons
+        function completeAllLessons() {
+            for (let i = 1; i <= totalLessons; i++) {
+                if (!completedLessons.includes(i)) {
+                    completeLesson(i);
+                }
+            }
+        }
+        
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress?')) {
+                completedLessons = [];
+                localStorage.removeItem('jsProgress');
+                
+                // Reset all lesson cards
+                for (let i = 1; i <= totalLessons; i++) {
+                    const lessonCard = document.getElementById(`lessonCard${i}`);
+                    if (lessonCard) {
+                        lessonCard.classList.remove('border-success', 'border-primary', 'border-2', 'lesson-complete');
+                        const badge = lessonCard.querySelector('.completion-badge');
+                        if (badge) {
+                            badge.remove();
+                        }
+                    }
+                }
+                
+                updateProgress();
+                showNotification('Progress reset successfully!');
+            }
+        }
+        
+        // Update progress bar and text
+        function updateProgress() {
+            const progress = Math.round((completedLessons.length / totalLessons) * 100);
+            const progressBar = document.getElementById('learningProgress');
+            const progressText = document.getElementById('progressText');
+            const footerProgress = document.getElementById('footerProgress');
+            const lessonsCompleted = document.getElementById('lessonsCompleted');
+            
+            progressBar.style.width = `${progress}%`;
+            progressBar.setAttribute('aria-valuenow', progress);
+            progressText.textContent = `${progress}% Complete`;
+            footerProgress.textContent = `${progress}%`;
+            lessonsCompleted.textContent = `${completedLessons.length}/${totalLessons} lessons completed`;
+            
+            // Change color based on progress
+            if (progress < 30) {
+                progressBar.className = 'progress-bar bg-danger';
+            } else if (progress < 70) {
+                progressBar.className = 'progress-bar bg-warning';
+            } else {
+                progressBar.className = 'progress-bar bg-success';
+            }
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'alert alert-success alert-dismissible fade show position-fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.zIndex = '1050';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+        
+        // Run code from editor
+        function runCode(editorId) {
+            const outputId = editorId.replace('Editor', 'Output');
+            const outputElement = document.getElementById(outputId);
+            const code = editors[editorId].getValue();
+            
+            // Clear previous output
+            outputElement.innerHTML = '<div class="log">Running code...</div>';
+            
+            // Capture console.log output
+            let consoleOutput = [];
+            const originalLog = console.log;
+            const originalError = console.error;
+            const originalWarn = console.warn;
+            const originalInfo = console.info;
+            
+            function captureLog(type, args) {
+                consoleOutput.push({
+                    type: type,
+                    message: Array.from(args).map(arg => 
+                        typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+                    ).join(' ')
+                });
+            }
+            
+            console.log = (...args) => {
+                captureLog('log', args);
+                originalLog.apply(console, args);
+            };
+            
+            console.error = (...args) => {
+                captureLog('error', args);
+                originalError.apply(console, args);
+            };
+            
+            console.warn = (...args) => {
+                captureLog('warn', args);
+                originalWarn.apply(console, args);
+            };
+            
+            console.info = (...args) => {
+                captureLog('info', args);
+                originalInfo.apply(console, args);
+            };
+            
+            try {
+                // Execute the code
+                eval(code);
+                
+                // Display output
+                outputElement.innerHTML = '';
+                consoleOutput.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = item.type;
+                    div.textContent = item.message;
+                    outputElement.appendChild(div);
+                });
+                
+                if (consoleOutput.length === 0) {
+                    outputElement.innerHTML = '<div class="log">Code executed successfully. No console output.</div>';
+                }
+                
+            } catch (error) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error';
+                errorDiv.textContent = `Error: ${error.message}`;
+                outputElement.innerHTML = '';
+                outputElement.appendChild(errorDiv);
+            } finally {
+                // Restore original console methods
+                console.log = originalLog;
+                console.error = originalError;
+                console.warn = originalWarn;
+                console.info = originalInfo;
+            }
+        }
+        
+        // Run DOM-specific code
+        function runDOMCode() {
+            const code = editors['domEditor'].getValue();
+            
+            try {
+                // Execute the code
+                eval(code);
+                showNotification('DOM code executed!');
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        }
+        
+        // Set example code
+        function setExample(editorId, exampleName) {
+            const examples = {
+                'letExample': `// Using let for variables that can change
+let counter = 0;
+counter = 1; // This is allowed
+console.log("Counter:", counter);
+
+// let is block-scoped
+if (true) {
+    let insideBlock = "I exist only in this block";
+    console.log(insideBlock);
+}
+// console.log(insideBlock); // Error! Not accessible outside block`,
+                
+                'constExample': `// Using const for variables that shouldn't change
+const PI = 3.14159;
+// PI = 3.14; // Error! Cannot reassign const
+
+// const with objects - the object can be modified, just not reassigned
+const person = { name: "Alice", age: 30 };
+person.age = 31; // This is allowed
+person.city = "New York"; // This is allowed
+// person = { name: "Bob" }; // Error! Cannot reassign
+
+console.log("Person:", person);
+
+// const with arrays
+const numbers = [1, 2, 3];
+numbers.push(4); // Allowed
+// numbers = [5, 6, 7]; // Error!`,
+                
+                'typeExample': `// JavaScript type checking
+const values = [
+    42,                    // number
+    "Hello",              // string
+    true,                 // boolean
+    null,                 // null
+    undefined,            // undefined
+    [1, 2, 3],            // object (array)
+    { x: 10 },            // object
+    function() {},        // function
+    Symbol("id"),         // symbol
+    BigInt(12345678901234567890) // bigint
+];
+
+values.forEach((value, index) => {
+    console.log(\`Value \${index}: \${value} (type: \${typeof value})\`);
+});
+
+// Type conversion
+console.log("String to number:", Number("123"));
+console.log("Number to string:", String(456));
+console.log("Boolean conversion:", Boolean("Hello")); // true
+console.log("Boolean conversion:", Boolean(""));      // false`
+            };
+            
+            if (examples[exampleName]) {
+                editors[editorId].setValue(examples[exampleName]);
+            }
+        }
+        
+        // Setup control flow demo
+        function setupControlFlowDemo() {
+            updateControlFlow();
+        }
+        
+        function updateControlFlow() {
+            const temp = document.getElementById('tempSlider').value;
+            const time = document.getElementById('timeOfDay').value;
+            const raining = document.getElementById('isRaining').checked;
+            
+            document.getElementById('tempValue').textContent = temp;
+            document.getElementById('codeTemp').textContent = temp;
+            document.getElementById('codeTime').textContent = time;
+            document.getElementById('codeRaining').textContent = raining;
+            
+            // Execute the control flow logic
+            let output = [];
+            const temperature = parseInt(temp);
+            
+            if (temperature > 30) {
+                output.push("It's hot! Stay hydrated.");
+            } else if (temperature > 20) {
+                output.push("Nice weather!");
+            } else if (temperature > 10) {
+                output.push("A bit chilly.");
+            } else {
+                output.push("It's cold! Wear a jacket.");
+            }
+            
+            switch(time) {
+                case "morning":
+                    output.push("Good morning!");
+                    break;
+                case "afternoon":
+                    output.push("Good afternoon!");
+                    break;
+                case "evening":
+                    output.push("Good evening!");
+                    break;
+                default:
+                    output.push("Good night!");
+            }
+            
+            const activity = raining ? "Stay inside" : "Go outside";
+            output.push(`Suggestion: ${activity}`);
+            
+            output.push("Counting from 1 to 3:");
+            for (let i = 1; i <= 3; i++) {
+                output.push(i);
+            }
+            
+            const outputElement = document.getElementById('flowOutputText');
+            outputElement.innerHTML = output.map(line => `<div class="log">${line}</div>`).join('');
+        }
+        
+        // Setup array demo
+        function setupArrayDemo() {
+            demoArrayOperation();
+        }
+        
+        function demoArrayOperation() {
+            const operation = document.getElementById('arrayOperation').value;
+            const originalArray = [5, 12, 8, 3, 20, 1, 15];
+            
+            document.getElementById('originalArray').textContent = JSON.stringify(originalArray);
+            
+            let result, operationText;
+            
+            switch(operation) {
+                case 'map':
+                    result = originalArray.map(x => x * 2);
+                    operationText = 'map(x => x * 2)';
+                    break;
+                case 'filter':
+                    result = originalArray.filter(x => x > 10);
+                    operationText = 'filter(x => x > 10)';
+                    break;
+                case 'reduce':
+                    result = originalArray.reduce((sum, x) => sum + x, 0);
+                    operationText = 'reduce((sum, x) => sum + x, 0)';
+                    break;
+                case 'find':
+                    result = originalArray.find(x => x > 15);
+                    operationText = 'find(x => x > 15)';
+                    break;
+                case 'sort':
+                    result = [...originalArray].sort((a, b) => a - b);
+                    operationText = 'sort((a, b) => a - b)';
+                    break;
+                case 'slice':
+                    result = originalArray.slice(2, 5);
+                    operationText = 'slice(2, 5)';
+                    break;
+            }
+            
+            document.getElementById('currentOperation').textContent = operationText;
+            document.getElementById('operationResult').textContent = JSON.stringify(result);
+            
+            // Update visualization
+            const viz = document.getElementById('arrayVisualization');
+            viz.innerHTML = '';
+            originalArray.forEach(num => {
+                const badge = document.createElement('span');
+                badge.className = 'badge bg-secondary';
+                badge.textContent = num;
+                viz.appendChild(badge);
+            });
+        }
+        
+        // Setup DOM demo
+        function setupDOMDemo() {
+            // Initialize event listeners for DOM playground
+            document.getElementById('demoButton').addEventListener('click', function() {
+                this.textContent = 'Clicked!';
+                this.classList.toggle('btn-primary');
+                this.classList.toggle('btn-success');
+            });
+        }
+        
+        function domAction(action) {
+            const element = document.getElementById('targetElement');
+            
+            switch(action) {
+                case 'changeText':
+                    document.getElementById('elementText').textContent = 
+                        'Text changed! ' + new Date().toLocaleTimeString();
+                    break;
+                case 'changeColor':
+                    const colors = ['#2d2d2d', '#3d2d5c', '#2d5c3d', '#5c3d2d'];
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    element.style.backgroundColor = randomColor;
+                    break;
+                case 'addElement':
+                    const newEl = document.createElement('div');
+                    newEl.className = 'alert alert-info mt-2';
+                    newEl.textContent = 'New element added at ' + new Date().toLocaleTimeString();
+                    element.appendChild(newEl);
+                    break;
+                case 'toggleVisibility':
+                    element.style.display = element.style.display === 'none' ? 'block' : 'none';
+                    break;
+                case 'reset':
+                    element.style = '';
+                    element.innerHTML = `
+                        <h6>Target Element</h6>
+                        <p id="elementText">This element can be modified with JavaScript</p>
+                        <button id="demoButton" class="btn btn-sm btn-primary">Click Me!</button>
+                    `;
+                    setupDOMDemo(); // Reattach event listeners
+                    break;
+            }
+        }
+        
+        // Setup ES6 demo
+        function setupES6Demo() {
+            showES6Example();
+        }
+        
+        function showES6Example() {
+            const feature = document.getElementById('es6Feature').value;
+            let code = '';
+            
+            switch(feature) {
+                case 'arrow':
+                    code = `// Arrow Functions
+// Concise syntax and lexical 'this'
+
+// Traditional function
+function add(a, b) {
+    return a + b;
+}
+
+// Arrow function equivalent
+const addArrow = (a, b) => a + b;
+
+// Single parameter, no parentheses needed
+const square = x => x * x;
+
+// No parameters
+const greet = () => "Hello!";
+
+// Multiple statements
+const complex = (x, y) => {
+    const sum = x + y;
+    return sum * 2;
+};
+
+// Arrow functions don't have their own 'this'
+const person = {
+    name: "John",
+    traditional: function() {
+        console.log(this.name); // 'this' refers to person
+    },
+    arrow: () => {
+        console.log(this.name); // 'this' refers to outer scope (global/window)
+    }
+};
+
+console.log("Add 5 + 3:", addArrow(5, 3));
+console.log("Square 4:", square(4));`;
+                    break;
+                    
+                case 'destructure':
+                    code = `// Destructuring Assignment
+// Unpack values from arrays or objects
+
+// Object destructuring
+const person = { 
+    name: "Alice", 
+    age: 30, 
+    city: "New York",
+    job: "Developer"
+};
+
+const { name, age, city } = person;
+console.log(\`\${name} is \${age} years old from \${city}\`);
+
+// Renaming variables during destructuring
+const { job: occupation } = person;
+console.log("Occupation:", occupation);
+
+// Default values
+const { country = "USA" } = person;
+console.log("Country:", country);
+
+// Array destructuring
+const colors = ["red", "green", "blue", "yellow"];
+const [firstColor, secondColor, ...otherColors] = colors;
+console.log("First:", firstColor);
+console.log("Second:", secondColor);
+console.log("Others:", otherColors);
+
+// Swapping variables
+let a = 10, b = 20;
+[a, b] = [b, a];
+console.log(\`a=\${a}, b=\${b}\`);
+
+// Function parameter destructuring
+function printPerson({ name, age }) {
+    console.log(\`\${name} is \${age} years old\`);
+}
+printPerson(person);`;
+                    break;
+                    
+                case 'spread':
+                    code = `// Spread and Rest Operators
+
+// Spread operator (...)
+// Expands an array/object into individual elements
+
+// Copying arrays
+const original = [1, 2, 3];
+const copy = [...original];
+console.log("Copy:", copy);
+
+// Merging arrays
+const moreNumbers = [...original, 4, 5, 6];
+console.log("Merged:", moreNumbers);
+
+// Spreading strings
+const name = "Alice";
+const letters = [...name];
+console.log("Letters:", letters);
+
+// Copying objects
+const user = { name: "John", age: 30 };
+const userCopy = { ...user, city: "New York" };
+console.log("User copy:", userCopy);
+
+// Merging objects
+const defaults = { theme: "dark", notifications: true };
+const settings = { ...defaults, notifications: false };
+console.log("Settings:", settings);
+
+// Rest operator (...)
+// Collects multiple elements into an array
+
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+console.log("Sum:", sum(1, 2, 3, 4, 5));
+
+// Rest with destructuring
+const [first, second, ...rest] = [10, 20, 30, 40, 50];
+console.log("First:", first, "Second:", second, "Rest:", rest);`;
+                    break;
+                    
+                case 'template':
+                    code = `// Template Literals
+// Use backticks (\`) for strings with enhanced features
+
+const name = "Alice";
+const age = 30;
+const city = "New York";
+
+// Basic interpolation
+const greeting = \`Hello, my name is \${name}!\`;
+console.log(greeting);
+
+// Multi-line strings
+const message = \`Name: \${name}
+Age: \${age}
+City: \${city}\`;
+console.log(message);
+
+// Expressions in template literals
+const price = 19.99;
+const quantity = 3;
+const total = \`Total: $\${price * quantity}\`;
+console.log(total);
+
+// Tagged templates
+function highlight(strings, ...values) {
+    return strings.reduce((result, str, i) => {
+        const value = values[i] ? \`<span class="highlight">\${values[i]}</span>\` : '';
+        return result + str + value;
+    }, '');
+}
+
+const highlighted = highlight\`Hello \${name}, you are \${age} years old!\`;
+console.log("Tagged:", highlighted);
+
+// Nested template literals
+const isMember = true;
+const discountMessage = \`\${isMember ? \`Member discount applied!\` : \`Become a member for discounts!\`}\`;
+console.log(discountMessage);`;
+                    break;
+                    
+                case 'modules':
+                    code = `// ES6 Modules
+// Export and import functionality between files
+
+// In file: math.js
+// export const PI = 3.14159;
+// export function add(a, b) { return a + b; }
+// export default function multiply(a, b) { return a * b; }
+
+// In file: app.js
+// Import named exports
+// import { PI, add } from './math.js';
+
+// Import default export
+// import multiply from './math.js';
+
+// Import everything
+// import * as math from './math.js';
+
+// Example usage (simulated)
+const math = {
+    PI: 3.14159,
+    add: (a, b) => a + b,
+    multiply: (a, b) => a * b
+};
+
+console.log("PI:", math.PI);
+console.log("Add 2 + 3:", math.add(2, 3));
+console.log("Multiply 2 * 3:", math.multiply(2, 3));
+
+// Dynamic imports (load modules on demand)
+// import('./math.js').then(module => {
+//     console.log("Module loaded dynamically:", module);
+// });
+
+console.log("Note: Run this in a module-enabled environment for full functionality");`;
+                    break;
+                    
+                case 'promises':
+                    code = `// Promises and Async/Await
+// Handle asynchronous operations
+
+// Creating a promise
+function fetchData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.3;
+            if (success) {
+                resolve({ data: "Success! Data received." });
+            } else {
+                reject(new Error("Failed to fetch data"));
+            }
+        }, 1000);
+    });
+}
+
+// Using promises with .then() and .catch()
+fetchData()
+    .then(response => {
+        console.log("Promise resolved:", response.data);
+        return "Processing complete";
+    })
+    .then(message => {
+        console.log(message);
+    })
+    .catch(error => {
+        console.error("Promise rejected:", error.message);
+    })
+    .finally(() => {
+        console.log("Promise settled (always runs)");
+    });
+
+// Async/await (syntactic sugar for promises)
+async function getData() {
+    try {
+        console.log("Fetching data...");
+        const response = await fetchData();
+        console.log("Async/await success:", response.data);
+        return response;
+    } catch (error) {
+        console.error("Async/await error:", error.message);
+        throw error;
+    } finally {
+        console.log("Async function complete");
+    }
+}
+
+// Calling async function
+getData().then(() => {
+    console.log("Data fetching process completed");
+});
+
+// Multiple promises
+const promise1 = Promise.resolve("First");
+const promise2 = new Promise(resolve => 
+    setTimeout(() => resolve("Second"), 500));
+const promise3 = fetchData();
+
+Promise.all([promise1, promise2, promise3])
+    .then(results => {
+        console.log("All promises resolved:", results);
+    })
+    .catch(error => {
+        console.error("One promise failed:", error);
+    });`;
+                    break;
+            }
+            
+            document.getElementById('es6Code').textContent = code;
+        }
+        
+        // Visualize function call (simplified)
+        function visualizeFunctionCall() {
+            const stack = document.getElementById('executionStack');
+            const items = [
+                'Global Execution Context',
+                'greet("Alice") called',
+                'Creating execution context for greet()',
+                'Calculating return value',
+                'Returning "Hello, Alice!"',
+                'greet() execution complete',
+                'Back to Global Execution Context'
+            ];
+            
+            stack.innerHTML = '';
+            let i = 0;
+            
+            const interval = setInterval(() => {
+                if (i < items.length) {
+                    const item = document.createElement('div');
+                    item.className = 'stack-item';
+                    if (i > 0) item.classList.add('active');
+                    item.textContent = items[i];
+                    stack.appendChild(item);
+                    stack.scrollTop = stack.scrollHeight;
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        stack.innerHTML = '<div class="stack-item">Global Execution Context</div>';
+                    }, 2000);
+                }
+            }, 800);
+        }
+        
+        // Show solution for challenges
+        function showSolution(challengeId) {
+            const solutions = {
+                'challenge1': `// FizzBuzz Solution
+function fizzBuzz() {
+    for (let i = 1; i <= 100; i++) {
+        if (i % 15 === 0) {
+            console.log("FizzBuzz");
+        } else if (i % 3 === 0) {
+            console.log("Fizz");
+        } else if (i % 5 === 0) {
+            console.log("Buzz");
+        } else {
+            console.log(i);
+        }
+    }
+}`,
+                'challenge2': `// Double Even Numbers Solution
+function doubleEvenNumbers(arr) {
+    // Filter even numbers, then double them
+    return arr
+        .filter(num => num % 2 === 0)
+        .map(num => num * 2);
+    
+    // Alternative solution using reduce:
+    // return arr.reduce((result, num) => {
+    //     if (num % 2 === 0) result.push(num * 2);
+    //     return result;
+    // }, []);
+}`
+            };
+            
+            if (solutions[challengeId]) {
+                const editorId = challengeId === 'challenge1' ? 'challenge1Editor' : 'challenge2Editor';
+                editors[editorId].setValue(solutions[challengeId]);
+            }
+        }
+        
+        // Counter functions for challenge 3
+        let counter = 0;
+        
+        function incrementCounter() {
+            counter++;
+            updateCounterDisplay();
+        }
+        
+        function decrementCounter() {
+            counter--;
+            updateCounterDisplay();
+        }
+        
+        function resetCounter() {
+            counter = 0;
+            updateCounterDisplay();
+        }
+        
+        function updateCounterDisplay() {
+            document.getElementById('counterDisplay').textContent = `Count: ${counter}`;
+        }
+        
+        // Helper functions
+        function showTab(tabId) {
+            const tab = document.querySelector(`button[data-bs-target="#${tabId}"]`);
+            if (tab) {
+                const bsTab = new bootstrap.Tab(tab);
+                bsTab.show();
+            }
+        }
+    </script>
+</body>
+</html>
