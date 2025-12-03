@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Learning Hub - Demos & Utilities</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --info-color: #0dcaf0;
+            --custom-color: #6f42c1;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+        
+        .jumbotron {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0a58ca 100%);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .code-example {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-example .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(0,0,0,0.1);
+            border: none;
+            border-radius: 3px;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .code-example .copy-btn:hover {
+            background-color: rgba(0,0,0,0.2);
+        }
+        
+        .live-demo-area {
+            background-color: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .demo-controls {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .utility-table {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .utility-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .utility-badge {
+            font-family: 'Courier New', monospace;
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .component-preview {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+        
+        .checkpoint {
+            background-color: #e7f1ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .tab-content {
+            padding-top: 20px;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .snippet-toggle {
+            background-color: #e9ecef;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .snippet-toggle:hover {
+            background-color: #dee2e6;
+        }
+        
+        .progress-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .lesson-complete {
+            background-color: #d1e7dd;
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .completion-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--success-color);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary">Bootstrap Learning Hub</h1>
+            <p class="lead">Interactive demos with code snippets & comprehensive utility classes guide</p>
+            <div class="progress" style="height: 8px; max-width: 500px; margin: 0 auto;">
+                <div id="learningProgress" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <p class="mt-2 text-muted"><span id="progressText">0% Complete</span> - Start learning!</p>
+        </header>
+        
+        <!-- Introduction -->
+        <div class="jumbotron">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2 class="display-6">Live Demos + Code Snippets</h2>
+                    <p class="lead">Every Bootstrap concept is demonstrated with a live interactive example and matching code snippet you can copy directly.</p>
+                    <p>Understand exactly how each utility class works by seeing it in action and viewing the corresponding HTML.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="bi bi-code-square" style="font-size: 8rem; opacity: 0.8;"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lesson Progress Cards -->
+        <div class="progress-section">
+            <h3 class="mb-4">Learning Path <small class="text-muted" id="lessonsCompleted">0/6 lessons completed</small></h3>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard1">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-grid-3x3-gap"></i>
+                            </div>
+                            <h5 class="card-title">Grid System</h5>
+                            <p class="card-text">Master Bootstrap's responsive grid layout system.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-demos'); startLesson(1);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard2">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-toggle-on"></i>
+                            </div>
+                            <h5 class="card-title">Components</h5>
+                            <p class="card-text">Learn buttons, cards, navbars and other components.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-demos'); startLesson(2);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard3">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-box"></i>
+                            </div>
+                            <h5 class="card-title">Spacing Utilities</h5>
+                            <p class="card-text">Understand margin, padding and spacing classes.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-demos'); startLesson(3);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard4">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-textarea-t"></i>
+                            </div>
+                            <h5 class="card-title">Utility Classes</h5>
+                            <p class="card-text">Complete reference for all Bootstrap utilities.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-utilities'); startLesson(4);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard5">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-palette"></i>
+                            </div>
+                            <h5 class="card-title">Customization</h5>
+                            <p class="card-text">Learn to customize Bootstrap to your liking.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-customize'); startLesson(5);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="lesson-card card" id="lessonCard6">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-laptop"></i>
+                            </div>
+                            <h5 class="card-title">Practice</h5>
+                            <p class="card-text">Build your own components with what you learned.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showTab('nav-utilities'); startLesson(6);">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <button class="btn btn-success" onclick="completeAllLessons()">Mark All Complete</button>
+                <button class="btn btn-outline-secondary ms-2" onclick="resetProgress()">Reset Progress</button>
+            </div>
+        </div>
+        
+        <!-- Navigation Tabs -->
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-demos-tab" data-bs-toggle="tab" data-bs-target="#nav-demos" type="button">Live Demos</button>
+                <button class="nav-link" id="nav-utilities-tab" data-bs-toggle="tab" data-bs-target="#nav-utilities" type="button">Utility Classes Guide</button>
+                <button class="nav-link" id="nav-customize-tab" data-bs-toggle="tab" data-bs-target="#nav-customize" type="button">Customization</button>
+            </div>
+        </nav>
+        
+        <!-- Tab Content -->
+        <div class="tab-content" id="nav-tabContent">
+            <!-- Live Demos Tab -->
+            <div class="tab-pane fade show active" id="nav-demos">
+                <div class="mt-4">
+                    <h3 class="mb-4">Interactive Bootstrap Demos</h3>
+                    <p class="mb-4">Click on each demo to see the corresponding HTML code. Modify the controls to see changes in real-time.</p>
+                    
+                    <!-- Demo 1: Grid System -->
+                    <div class="card mb-4" id="demo1Section">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Demo 1: Responsive Grid System</h4>
+                            <button class="btn btn-sm btn-light" onclick="completeLesson(1)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <p>The grid system uses containers, rows, and columns. Each row has 12 virtual columns to distribute.</p>
+                            
+                            <div class="demo-controls">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label">Column 1 Size (out of 12)</label>
+                                        <input type="range" class="form-range" id="col1Size" min="1" max="12" value="4">
+                                        <div class="text-center"><span id="col1Value">4</span> columns</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Column 2 Size (out of 12)</label>
+                                        <input type="range" class="form-range" id="col2Size" min="1" max="12" value="4">
+                                        <div class="text-center"><span id="col2Value">4</span> columns</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Column 3 Size (out of 12)</label>
+                                        <input type="range" class="form-range" id="col3Size" min="1" max="12" value="4">
+                                        <div class="text-center"><span id="col3Value">4</span> columns</div>
+                                    </div>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="responsiveGrid" checked>
+                                    <label class="form-check-label" for="responsiveGrid">Make responsive (col-md-*)</label>
+                                </div>
+                            </div>
+                            
+                            <h5 class="mt-4">Live Demo:</h5>
+                            <div class="live-demo-area">
+                                <div class="container-fluid border rounded p-3" id="gridDemo">
+                                    <div class="row">
+                                        <div class="col-md-4 p-3 bg-primary text-white text-center rounded">Column 1</div>
+                                        <div class="col-md-4 p-3 bg-success text-white text-center rounded">Column 2</div>
+                                        <div class="col-md-4 p-3 bg-info text-white text-center rounded">Column 3</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="snippet-toggle" onclick="toggleSnippet('gridSnippet')">Show/Hide Code Snippet</button>
+                            
+                            <div id="gridSnippet" class="code-example mt-3" style="display: none;">
+                                <button class="copy-btn" onclick="copyCode('gridSnippetCode')">Copy</button>
+                                <pre id="gridSnippetCode"><code>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-4"&gt;Column 1&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;Column 2&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;Column 3&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                            
+                            <div class="checkpoint mt-3">
+                                <h6><i class="bi bi-lightbulb text-warning"></i> Grid System Explained:</h6>
+                                <p><code>col-md-4</code> means "on medium screens and up, take 4 out of 12 columns".</p>
+                                <p><code>col-12 col-md-6 col-lg-4</code> would be "full width on mobile, half width on tablets, one-third width on desktops".</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Demo 2: Buttons -->
+                    <div class="card mb-4" id="demo2Section">
+                        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Demo 2: Button Styles & Sizes</h4>
+                            <button class="btn btn-sm btn-light" onclick="completeLesson(2)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <p>Bootstrap includes several predefined button styles, each serving its own semantic purpose.</p>
+                            
+                            <div class="demo-controls">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Button Style</label>
+                                        <select class="form-select" id="buttonStyle">
+                                            <option value="btn-primary">Primary (Blue)</option>
+                                            <option value="btn-secondary">Secondary (Gray)</option>
+                                            <option value="btn-success">Success (Green)</option>
+                                            <option value="btn-danger">Danger (Red)</option>
+                                            <option value="btn-warning">Warning (Yellow)</option>
+                                            <option value="btn-outline-primary">Outline Primary</option>
+                                            <option value="btn-link">Link Style</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Button Size</label>
+                                        <select class="form-select" id="buttonSize">
+                                            <option value="btn-sm">Small</option>
+                                            <option value="" selected>Regular</option>
+                                            <option value="btn-lg">Large</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="disabledButton">
+                                    <label class="form-check-label" for="disabledButton">Make button disabled</label>
+                                </div>
+                            </div>
+                            
+                            <h5 class="mt-4">Live Demo:</h5>
+                            <div class="live-demo-area">
+                                <div class="d-flex align-items-center justify-content-center flex-wrap gap-3" id="buttonDemo">
+                                    <button class="btn btn-primary">Primary Button</button>
+                                    <button class="btn btn-outline-secondary">Outline Button</button>
+                                    <button class="btn btn-success btn-lg">Large Success</button>
+                                </div>
+                            </div>
+                            
+                            <button class="snippet-toggle" onclick="toggleSnippet('buttonSnippet')">Show/Hide Code Snippet</button>
+                            
+                            <div id="buttonSnippet" class="code-example mt-3" style="display: none;">
+                                <button class="copy-btn" onclick="copyCode('buttonSnippetCode')">Copy</button>
+                                <pre id="buttonSnippetCode"><code>&lt;button class="btn btn-primary"&gt;Primary Button&lt;/button&gt;
+&lt;button class="btn btn-outline-secondary"&gt;Outline Button&lt;/button&gt;
+&lt;button class="btn btn-success btn-lg"&gt;Large Success Button&lt;/button&gt;
+&lt;button class="btn btn-danger" disabled&gt;Disabled Button&lt;/button&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Demo 3: Spacing Utilities -->
+                    <div class="card mb-4" id="demo3Section">
+                        <div class="card-header bg-info text-dark d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Demo 3: Spacing Utilities (Margin & Padding)</h4>
+                            <button class="btn btn-sm btn-light" onclick="completeLesson(3)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <p>Bootstrap includes a wide range of shorthand responsive margin and padding utility classes.</p>
+                            
+                            <div class="demo-controls">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Margin Size</label>
+                                        <select class="form-select" id="marginSize">
+                                            <option value="m-0">0 (none)</option>
+                                            <option value="m-1">1 (0.25rem)</option>
+                                            <option value="m-2">2 (0.5rem)</option>
+                                            <option value="m-3" selected>3 (1rem)</option>
+                                            <option value="m-4">4 (1.5rem)</option>
+                                            <option value="m-5">5 (3rem)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Padding Size</label>
+                                        <select class="form-select" id="paddingSize">
+                                            <option value="p-0">0 (none)</option>
+                                            <option value="p-1">1 (0.25rem)</option>
+                                            <option value="p-2">2 (0.5rem)</option>
+                                            <option value="p-3" selected>3 (1rem)</option>
+                                            <option value="p-4">4 (1.5rem)</option>
+                                            <option value="p-5">5 (3rem)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h5 class="mt-4">Live Demo:</h5>
+                            <div class="live-demo-area">
+                                <div class="border rounded p-3" id="spacingDemo">
+                                    <div class="d-flex gap-3">
+                                        <div class="p-3 bg-primary text-white rounded">Box 1</div>
+                                        <div class="p-3 bg-success text-white rounded">Box 2</div>
+                                        <div class="p-3 bg-warning text-dark rounded">Box 3</div>
+                                    </div>
+                                    <div class="mt-3 p-3 bg-light border rounded">
+                                        This container demonstrates margin and padding utilities. The boxes above use padding (p-3).
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="snippet-toggle" onclick="toggleSnippet('spacingSnippet')">Show/Hide Code Snippet</button>
+                            
+                            <div id="spacingSnippet" class="code-example mt-3" style="display: none;">
+                                <button class="copy-btn" onclick="copyCode('spacingSnippetCode')">Copy</button>
+                                <pre id="spacingSnippetCode"><code>&lt;!-- Margin examples --&gt;
+&lt;div class="m-3"&gt;Margin: 1rem on all sides&lt;/div&gt;
+&lt;div class="mt-2"&gt;Margin top: 0.5rem&lt;/div&gt;
+&lt;div class="mb-4"&gt;Margin bottom: 1.5rem&lt;/div&gt;
+&lt;div class="mx-auto"&gt;Horizontal auto margin (centering)&lt;/div&gt;
+
+&lt;!-- Padding examples --&gt;
+&lt;div class="p-3"&gt;Padding: 1rem on all sides&lt;/div&gt;
+&lt;div class="pt-2"&gt;Padding top: 0.5rem&lt;/div&gt;
+&lt;div class="px-4"&gt;Padding left & right: 1.5rem&lt;/div&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Utility Classes Guide Tab -->
+            <div class="tab-pane fade" id="nav-utilities">
+                <div class="mt-4">
+                    <h3 class="mb-4">Bootstrap Utility Classes Complete Reference</h3>
+                    <p class="mb-4">Utility classes are single-purpose classes that do one thing well. They follow a consistent naming pattern.</p>
+                    
+                    <div class="checkpoint" id="lesson4Section">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5><i class="bi bi-lightbulb text-warning"></i> Utility Class Structure:</h5>
+                                <p>Most utility classes follow this pattern: <code>{property}{sides}-{size}</code></p>
+                                <ul>
+                                    <li><span class="highlight">property</span>: What you're setting (m for margin, p for padding, etc.)</li>
+                                    <li><span class="highlight">sides</span>: Which sides (t for top, b for bottom, x for left+right, etc.)</li>
+                                    <li><span class="highlight">size</span>: How much (0-5, auto, or responsive breakpoint)</li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-sm btn-success" onclick="completeLesson(4)">Mark Complete</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Spacing Utilities Table -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">Spacing Utilities (Margin & Padding)</h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="utility-table">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th width="30%">Class</th>
+                                            <th>What it means</th>
+                                            <th>Example</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="utility-badge">m-*</span></td>
+                                            <td>Margin on ALL sides</td>
+                                            <td><code>m-3</code> = 1rem margin all around</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">mt-*</span></td>
+                                            <td>Margin TOP only</td>
+                                            <td><code>mt-2</code> = 0.5rem top margin</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">mb-*</span></td>
+                                            <td>Margin BOTTOM only</td>
+                                            <td><code>mb-4</code> = 1.5rem bottom margin</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">ms-*</span> (start)</td>
+                                            <td>Margin LEFT (in LTR languages)</td>
+                                            <td><code>ms-3</code> = 1rem left margin</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">me-*</span> (end)</td>
+                                            <td>Margin RIGHT (in LTR languages)</td>
+                                            <td><code>me-2</code> = 0.5rem right margin</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">mx-*</span></td>
+                                            <td>Margin LEFT & RIGHT (horizontal)</td>
+                                            <td><code>mx-4</code> = 1.5rem left & right margin</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">my-*</span></td>
+                                            <td>Margin TOP & BOTTOM (vertical)</td>
+                                            <td><code>my-3</code> = 1rem top & bottom margin</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">p-*</span></td>
+                                            <td>Padding on ALL sides</td>
+                                            <td><code>p-3</code> = 1rem padding all around</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">pt-*</span></td>
+                                            <td>Padding TOP only</td>
+                                            <td><code>pt-2</code> = 0.5rem top padding</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">pb-*</span></td>
+                                            <td>Padding BOTTOM only</td>
+                                            <td><code>pb-4</code> = 1.5rem bottom padding</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">ps-*</span></td>
+                                            <td>Padding LEFT (in LTR languages)</td>
+                                            <td><code>ps-3</code> = 1rem left padding</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">pe-*</span></td>
+                                            <td>Padding RIGHT (in LTR languages)</td>
+                                            <td><code>pe-2</code> = 0.5rem right padding</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">px-*</span></td>
+                                            <td>Padding LEFT & RIGHT (horizontal)</td>
+                                            <td><code>px-4</code> = 1.5rem left & right padding</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">py-*</span></td>
+                                            <td>Padding TOP & BOTTOM (vertical)</td>
+                                            <td><code>py-3</code> = 1rem top & bottom padding</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="bg-light">
+                                                <strong>Size scale:</strong> 0=0rem, 1=0.25rem, 2=0.5rem, 3=1rem, 4=1.5rem, 5=3rem
+                                                <br><strong>Auto:</strong> <code>mx-auto</code> centers horizontally
+                                                <br><strong>Responsive:</strong> <code>mt-md-3</code> applies only on medium screens and up
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Grid & Display Utilities -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h4 class="mb-0">Grid & Display Utilities</h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="utility-table">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th width="30%">Class</th>
+                                            <th>What it means</th>
+                                            <th>Example</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="utility-badge">col-*</span></td>
+                                            <td>Grid column (out of 12)</td>
+                                            <td><code>col-6</code> = 6/12 width (50%)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">col-sm-*</span></td>
+                                            <td>Column on SM screens & up</td>
+                                            <td><code>col-sm-4</code> = 4 columns on small+</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">col-md-*</span></td>
+                                            <td>Column on MD screens & up</td>
+                                            <td><code>col-md-3</code> = 3 columns on medium+</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">d-*</span></td>
+                                            <td>Display property</td>
+                                            <td><code>d-flex</code>, <code>d-none</code>, <code>d-block</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">d-sm-*</span></td>
+                                            <td>Display on SM screens & up</td>
+                                            <td><code>d-none d-md-block</code> = hide on mobile, show on medium+</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">flex-*</span></td>
+                                            <td>Flexbox utilities</td>
+                                            <td><code>flex-row</code>, <code>flex-column</code>, <code>flex-wrap</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">justify-content-*</span></td>
+                                            <td>Horizontal alignment</td>
+                                            <td><code>justify-content-between</code>, <code>justify-content-center</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">align-items-*</span></td>
+                                            <td>Vertical alignment</td>
+                                            <td><code>align-items-center</code>, <code>align-items-start</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="bg-light">
+                                                <strong>Grid breakpoints:</strong> sm (≥576px), md (≥768px), lg (≥992px), xl (≥1200px), xxl (≥1400px)
+                                                <br><strong>Display values:</strong> none, inline, inline-block, block, table, flex, inline-flex, grid
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Text & Color Utilities -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-dark">
+                            <h4 class="mb-0">Text & Color Utilities</h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="utility-table">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th width="30%">Class</th>
+                                            <th>What it means</th>
+                                            <th>Example</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="utility-badge">text-*</span></td>
+                                            <td>Text color</td>
+                                            <td><code>text-primary</code>, <code>text-danger</code>, <code>text-muted</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">bg-*</span></td>
+                                            <td>Background color</td>
+                                            <td><code>bg-light</code>, <code>bg-success</code>, <code>bg-warning</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">fs-*</span></td>
+                                            <td>Font size</td>
+                                            <td><code>fs-1</code> (largest) to <code>fs-6</code> (smallest)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">fw-*</span></td>
+                                            <td>Font weight</td>
+                                            <td><code>fw-bold</code>, <code>fw-normal</code>, <code>fw-light</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">text-*</span></td>
+                                            <td>Text alignment</td>
+                                            <td><code>text-center</code>, <code>text-end</code>, <code>text-start</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">text-*</span></td>
+                                            <td>Text transformation</td>
+                                            <td><code>text-uppercase</code>, <code>text-lowercase</code>, <code>text-capitalize</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">border</span></td>
+                                            <td>Adds border</td>
+                                            <td><code>border</code>, <code>border-top</code>, <code>border-0</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="utility-badge">rounded</span></td>
+                                            <td>Border radius</td>
+                                            <td><code>rounded</code>, <code>rounded-circle</code>, <code>rounded-pill</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="bg-light">
+                                                <strong>Color themes:</strong> primary (blue), secondary (gray), success (green), danger (red), warning (yellow), info (teal), light, dark
+                                                <br><strong>Responsive text:</strong> <code>text-md-center</code> centers text on medium screens and up
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Area -->
+                    <div class="card" id="lesson6Section">
+                        <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Practice: Build Your Own Component</h4>
+                            <button class="btn btn-sm btn-light" onclick="completeLesson(6)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <p>Use what you've learned to create a card component with the classes below:</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Select Card Style:</label>
+                                        <select class="form-select" id="cardStyleSelect">
+                                            <option value="border-primary text-primary">Primary Border</option>
+                                            <option value="bg-primary text-white">Primary Background</option>
+                                            <option value="bg-success text-white">Success Background</option>
+                                            <option value="border-warning">Warning Border</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Add Margin:</label>
+                                        <select class="form-select" id="cardMarginSelect">
+                                            <option value="m-0">No margin</option>
+                                            <option value="m-2">Small margin</option>
+                                            <option value="m-3" selected>Regular margin</option>
+                                            <option value="m-4">Large margin</option>
+                                            <option value="my-4 mx-auto">Centered with vertical margin</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Add Padding:</label>
+                                        <select class="form-select" id="cardPaddingSelect">
+                                            <option value="p-0">No padding</option>
+                                            <option value="p-2">Small padding</option>
+                                            <option value="p-3" selected>Regular padding</option>
+                                            <option value="p-4">Large padding</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Your Card:</h5>
+                                    <div id="practiceCard" class="card m-3 border-primary">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title</h5>
+                                            <p class="card-text">This is a practice card. Use the controls to change its appearance with utility classes.</p>
+                                            <a href="#" class="btn btn-primary">Example Button</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="code-example mt-3">
+                                <button class="copy-btn" onclick="copyCode('practiceCardCode')">Copy</button>
+                                <pre id="practiceCardCode"><code>&lt;div class="card m-3 border-primary"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
+    &lt;p class="card-text"&gt;This is a practice card...&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Example Button&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Customization Tab -->
+            <div class="tab-pane fade" id="nav-customize">
+                <div class="mt-4">
+                    <h3 class="mb-4">Customizing Bootstrap</h3>
+                    <p>Learn how to override Bootstrap's default styles to match your design.</p>
+                    
+                    <div class="card mb-4" id="lesson5Section">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Method 1: CSS Overrides</h4>
+                            <button class="btn btn-sm btn-light" onclick="completeLesson(5)">Mark Complete</button>
+                        </div>
+                        <div class="card-body">
+                            <p>Create your own CSS file that loads AFTER Bootstrap and override styles:</p>
+                            
+                            <div class="code-example">
+                                <button class="copy-btn" onclick="copyCode('overrideCode')">Copy</button>
+                                <pre id="overrideCode"><code>/* custom.css - Load this AFTER bootstrap.css */
+
+/* Change primary color */
+.btn-primary {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+.btn-primary:hover {
+    background-color: #5936a0;
+    border-color: #5936a0;
+}
+
+/* Change navbar */
+.navbar {
+    border-bottom: 3px solid #6f42c1;
+}
+
+/* Increase border radius */
+.rounded {
+    border-radius: 10px !important;
+}
+
+/* Custom shadow */
+.shadow {
+    box-shadow: 0 5px 15px rgba(111, 66, 193, 0.2) !important;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h4 class="mb-0">Method 2: CSS Variables (Recommended)</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Bootstrap 5 uses CSS custom properties that you can override:</p>
+                            
+                            <div class="code-example">
+                                <button class="copy-btn" onclick="copyCode('cssVarsCode')">Copy</button>
+                                <pre id="cssVarsCode"><code>/* Override in your CSS file */
+:root {
+    /* Color system */
+    --bs-primary: #6f42c1;
+    --bs-primary-rgb: 111, 66, 193;
+    --bs-secondary: #ea39b8;
+    --bs-success: #198754;
+    
+    /* Typography */
+    --bs-font-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+    --bs-body-font-size: 1.1rem;
+    
+    /* Borders */
+    --bs-border-radius: 0.5rem;
+    --bs-border-radius-sm: 0.25rem;
+    
+    /* Spacing */
+    --bs-spacer: 1.2rem;
+    
+    /* Shadows */
+    --bs-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-dark">
+                            <h4 class="mb-0">Method 3: Sass Customization (Most Powerful)</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>For complete control, customize Bootstrap's Sass variables before compiling:</p>
+                            
+                            <div class="code-example">
+                                <button class="copy-btn" onclick="copyCode('sassCode')">Copy</button>
+                                <pre id="sassCode"><code>// custom.scss
+
+// 1. Override default variables
+$primary: #6f42c1;
+$secondary: #ea39b8;
+$enable-rounded: true;
+$border-radius: .5rem;
+$font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+
+// 2. Import Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// 3. Add custom styles
+.custom-component {
+    background-color: tint-color($primary, 90%);
+    border-left: 4px solid $primary;
+}
+
+// Create your own utility classes
+.bg-gradient-primary {
+    background: linear-gradient(135deg, $primary 0%, darken($primary, 15%) 100%);
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h4 class="mb-0">Live Customization Demo</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Primary Color:</label>
+                                        <input type="color" class="form-control form-control-color" id="customPrimary" value="#6f42c1">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Border Radius:</label>
+                                        <input type="range" class="form-range" id="customRadius" min="0" max="20" value="5">
+                                        <div class="text-center"><span id="radiusValue2">5</span>px</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Font Size:</label>
+                                        <select class="form-select" id="customFontSize">
+                                            <option value="0.9rem">Small</option>
+                                            <option value="1rem" selected>Normal</option>
+                                            <option value="1.1rem">Large</option>
+                                            <option value="1.2rem">X-Large</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="customDemo" class="p-4 border rounded">
+                                        <h5 class="mb-3">Customized Component</h5>
+                                        <p>This component changes based on your selections.</p>
+                                        <button class="btn btn-primary me-2">Primary Button</button>
+                                        <button class="btn btn-outline-secondary">Outline Button</button>
+                                        <div class="mt-3 p-3 bg-light rounded">
+                                            Notice how the button color, border radius, and text size change.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Bootstrap Learning Hub</h5>
+                    <p>Interactive demos with matching code snippets & comprehensive utility reference.</p>
+                    <p class="text-muted mb-0">Progress: <span id="footerProgress">0%</span> complete</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Created with <i class="bi bi-heart-fill text-danger"></i> for Bootstrap learners</p>
+                    <div class="mt-2">
+                        <button class="btn btn-outline-light btn-sm me-2" onclick="showTab('nav-demos')">Demos</button>
+                        <button class="btn btn-outline-light btn-sm me-2" onclick="showTab('nav-utilities')">Utilities</button>
+                        <button class="btn btn-outline-light btn-sm" onclick="showTab('nav-customize')">Customize</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Track completed lessons
+        let completedLessons = [];
+        const totalLessons = 6;
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load progress from localStorage if available
+            const savedProgress = localStorage.getItem('bootstrapProgress');
+            if (savedProgress) {
+                completedLessons = JSON.parse(savedProgress);
+            }
+            
+            updateProgress();
+            
+            // Set up event listeners for live demos
+            setupGridDemo();
+            setupButtonDemo();
+            setupSpacingDemo();
+            setupPracticeCard();
+            setupCustomizationDemo();
+            
+            // Set up copy buttons for all code snippets
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const codeId = this.getAttribute('onclick').match(/copyCode\('(.+)'\)/)[1];
+                    copyCode(codeId);
+                });
+            });
+            
+            // Mark first lesson as started
+            if (completedLessons.length === 0) {
+                startLesson(1);
+            }
+        });
+        
+        // Start a lesson
+        function startLesson(lessonNumber) {
+            // Mark lesson card as active
+            const lessonCard = document.getElementById(`lessonCard${lessonNumber}`);
+            if (lessonCard) {
+                lessonCard.classList.add('border-primary');
+                lessonCard.classList.add('border-2');
+            }
+        }
+        
+        // Complete a lesson
+        function completeLesson(lessonNumber) {
+            if (!completedLessons.includes(lessonNumber)) {
+                completedLessons.push(lessonNumber);
+                
+                // Update UI for this lesson
+                const lessonCard = document.getElementById(`lessonCard${lessonNumber}`);
+                if (lessonCard) {
+                    lessonCard.classList.remove('border-primary');
+                    lessonCard.classList.add('border-success');
+                    lessonCard.classList.add('border-2');
+                    lessonCard.classList.add('lesson-complete');
+                    
+                    // Add checkmark badge
+                    if (!lessonCard.querySelector('.completion-badge')) {
+                        const badge = document.createElement('div');
+                        badge.className = 'completion-badge';
+                        badge.innerHTML = '<i class="bi bi-check"></i>';
+                        lessonCard.style.position = 'relative';
+                        lessonCard.appendChild(badge);
+                    }
+                }
+                
+                // Update progress
+                updateProgress();
+                
+                // Save to localStorage
+                localStorage.setItem('bootstrapProgress', JSON.stringify(completedLessons));
+                
+                // Show notification
+                showNotification(`Lesson ${lessonNumber} completed!`);
+            }
+        }
+        
+        // Complete all lessons
+        function completeAllLessons() {
+            for (let i = 1; i <= totalLessons; i++) {
+                if (!completedLessons.includes(i)) {
+                    completeLesson(i);
+                }
+            }
+        }
+        
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress?')) {
+                completedLessons = [];
+                localStorage.removeItem('bootstrapProgress');
+                
+                // Reset all lesson cards
+                for (let i = 1; i <= totalLessons; i++) {
+                    const lessonCard = document.getElementById(`lessonCard${i}`);
+                    if (lessonCard) {
+                        lessonCard.classList.remove('border-success', 'border-primary', 'border-2', 'lesson-complete');
+                        const badge = lessonCard.querySelector('.completion-badge');
+                        if (badge) {
+                            badge.remove();
+                        }
+                    }
+                }
+                
+                updateProgress();
+                showNotification('Progress reset successfully!');
+            }
+        }
+        
+        // Update progress bar and text
+        function updateProgress() {
+            const progress = Math.round((completedLessons.length / totalLessons) * 100);
+            const progressBar = document.getElementById('learningProgress');
+            const progressText = document.getElementById('progressText');
+            const footerProgress = document.getElementById('footerProgress');
+            const lessonsCompleted = document.getElementById('lessonsCompleted');
+            
+            progressBar.style.width = `${progress}%`;
+            progressBar.setAttribute('aria-valuenow', progress);
+            progressText.textContent = `${progress}% Complete`;
+            footerProgress.textContent = `${progress}%`;
+            lessonsCompleted.textContent = `${completedLessons.length}/${totalLessons} lessons completed`;
+            
+            // Change color based on progress
+            if (progress < 30) {
+                progressBar.className = 'progress-bar bg-danger';
+            } else if (progress < 70) {
+                progressBar.className = 'progress-bar bg-warning';
+            } else {
+                progressBar.className = 'progress-bar bg-success';
+            }
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'alert alert-success alert-dismissible fade show position-fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.zIndex = '1050';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+        
+        // Setup grid demo
+        function setupGridDemo() {
+            const col1 = document.getElementById('col1Size');
+            const col2 = document.getElementById('col2Size');
+            const col3 = document.getElementById('col3Size');
+            const responsive = document.getElementById('responsiveGrid');
+            
+            const updateGrid = () => {
+                const col1Val = col1.value;
+                const col2Val = col2.value;
+                const col3Val = col3.value;
+                const isResponsive = responsive.checked;
+                
+                // Update display values
+                document.getElementById('col1Value').textContent = col1Val;
+                document.getElementById('col2Value').textContent = col2Val;
+                document.getElementById('col3Value').textContent = col3Val;
+                
+                // Calculate column classes
+                const prefix = isResponsive ? 'col-md-' : 'col-';
+                
+                // Update grid demo
+                const gridDemo = document.getElementById('gridDemo');
+                gridDemo.innerHTML = `
+                    <div class="row">
+                        <div class="${prefix}${col1Val} p-3 bg-primary text-white text-center rounded">Column 1</div>
+                        <div class="${prefix}${col2Val} p-3 bg-success text-white text-center rounded">Column 2</div>
+                        <div class="${prefix}${col3Val} p-3 bg-info text-white text-center rounded">Column 3</div>
+                    </div>
+                `;
+                
+                // Update code snippet
+                const snippet = document.getElementById('gridSnippetCode');
+                snippet.innerHTML = `&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="${prefix}${col1Val}"&gt;Column 1&lt;/div&gt;
+    &lt;div class="${prefix}${col2Val}"&gt;Column 2&lt;/div&gt;
+    &lt;div class="${prefix}${col3Val}"&gt;Column 3&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;`.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            };
+            
+            col1.addEventListener('input', updateGrid);
+            col2.addEventListener('input', updateGrid);
+            col3.addEventListener('input', updateGrid);
+            responsive.addEventListener('change', updateGrid);
+        }
+        
+        // Setup button demo
+        function setupButtonDemo() {
+            const styleSelect = document.getElementById('buttonStyle');
+            const sizeSelect = document.getElementById('buttonSize');
+            const disabledCheck = document.getElementById('disabledButton');
+            
+            const updateButton = () => {
+                const style = styleSelect.value;
+                const size = sizeSelect.value;
+                const isDisabled = disabledCheck.checked;
+                const disabledAttr = isDisabled ? ' disabled' : '';
+                
+                // Update button demo
+                const buttonDemo = document.getElementById('buttonDemo');
+                buttonDemo.innerHTML = `
+                    <button class="btn ${style} ${size}"${disabledAttr}>${getButtonText(style)} Button</button>
+                `;
+                
+                // Update code snippet
+                const snippet = document.getElementById('buttonSnippetCode');
+                snippet.innerHTML = `&lt;button class="btn ${style} ${size}"${disabledAttr}&gt;${getButtonText(style)} Button&lt;/button&gt;`.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            };
+            
+            styleSelect.addEventListener('change', updateButton);
+            sizeSelect.addEventListener('change', updateButton);
+            disabledCheck.addEventListener('change', updateButton);
+            
+            function getButtonText(style) {
+                const styles = {
+                    'btn-primary': 'Primary',
+                    'btn-secondary': 'Secondary', 
+                    'btn-success': 'Success',
+                    'btn-danger': 'Danger',
+                    'btn-warning': 'Warning',
+                    'btn-outline-primary': 'Outline Primary',
+                    'btn-link': 'Link'
+                };
+                return styles[style] || 'Custom';
+            }
+        }
+        
+        // Setup spacing demo
+        function setupSpacingDemo() {
+            const marginSelect = document.getElementById('marginSize');
+            const paddingSelect = document.getElementById('paddingSize');
+            
+            const updateSpacing = () => {
+                const margin = marginSelect.value;
+                const padding = paddingSelect.value;
+                
+                // Update spacing demo
+                const spacingDemo = document.getElementById('spacingDemo');
+                const marginClass = margin;
+                const paddingClass = padding;
+                
+                // Clear and rebuild demo
+                spacingDemo.innerHTML = `
+                    <div class="d-flex gap-3">
+                        <div class="${paddingClass} bg-primary text-white rounded">Box 1</div>
+                        <div class="${paddingClass} bg-success text-white rounded">Box 2</div>
+                        <div class="${paddingClass} bg-warning text-dark rounded">Box 3</div>
+                    </div>
+                    <div class="${marginClass} ${paddingClass} bg-light border rounded">
+                        This container demonstrates margin and padding utilities. The boxes above use ${paddingClass}.
+                    </div>
+                `;
+                
+                // Update code snippet
+                const snippet = document.getElementById('spacingSnippetCode');
+                snippet.innerHTML = `&lt;!-- Using ${marginClass} and ${paddingClass} --&gt;
+&lt;div class="${marginClass} ${paddingClass} bg-light border rounded"&gt;
+  This element has ${marginClass.replace('m', 'margin')} and ${paddingClass.replace('p', 'padding')}.
+&lt;/div&gt;`.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            };
+            
+            marginSelect.addEventListener('change', updateSpacing);
+            paddingSelect.addEventListener('change', updateSpacing);
+        }
+        
+        // Setup practice card
+        function setupPracticeCard() {
+            const styleSelect = document.getElementById('cardStyleSelect');
+            const marginSelect = document.getElementById('cardMarginSelect');
+            const paddingSelect = document.getElementById('cardPaddingSelect');
+            
+            const updatePracticeCard = () => {
+                const style = styleSelect.value;
+                const margin = marginSelect.value;
+                const padding = paddingSelect.value.split(' ')[0]; // Get first padding class
+                
+                // Update practice card
+                const practiceCard = document.getElementById('practiceCard');
+                practiceCard.className = `card ${margin} ${style}`;
+                
+                // Update card body padding
+                const cardBody = practiceCard.querySelector('.card-body');
+                cardBody.className = `card-body ${padding}`;
+                
+                // Update code snippet
+                const snippet = document.getElementById('practiceCardCode');
+                snippet.innerHTML = `&lt;div class="card ${margin} ${style}"&gt;
+  &lt;div class="card-body ${padding}"&gt;
+    &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
+    &lt;p class="card-text"&gt;This is a practice card...&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Example Button&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;`.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            };
+            
+            styleSelect.addEventListener('change', updatePracticeCard);
+            marginSelect.addEventListener('change', updatePracticeCard);
+            paddingSelect.addEventListener('change', updatePracticeCard);
+        }
+        
+        // Setup customization demo
+        function setupCustomizationDemo() {
+            const colorPicker = document.getElementById('customPrimary');
+            const radiusSlider = document.getElementById('customRadius');
+            const fontSizeSelect = document.getElementById('customFontSize');
+            
+            const updateCustomization = () => {
+                const color = colorPicker.value;
+                const radius = radiusSlider.value + 'px';
+                const fontSize = fontSizeSelect.value;
+                
+                // Update display
+                document.getElementById('radiusValue2').textContent = radiusSlider.value;
+                
+                // Update demo
+                const demo = document.getElementById('customDemo');
+                demo.style.borderRadius = radius;
+                demo.style.fontSize = fontSize;
+                
+                // Update button color
+                const button = demo.querySelector('.btn-primary');
+                button.style.backgroundColor = color;
+                button.style.borderColor = color;
+                
+                // Update outline button
+                const outlineButton = demo.querySelector('.btn-outline-secondary');
+                outlineButton.addEventListener('mouseover', function() {
+                    this.style.borderColor = color;
+                    this.style.color = color;
+                });
+                outlineButton.addEventListener('mouseout', function() {
+                    this.style.borderColor = '';
+                    this.style.color = '';
+                });
+            };
+            
+            colorPicker.addEventListener('input', updateCustomization);
+            radiusSlider.addEventListener('input', updateCustomization);
+            fontSizeSelect.addEventListener('change', updateCustomization);
+        }
+        
+        // Helper functions
+        function toggleSnippet(id) {
+            const snippet = document.getElementById(id);
+            snippet.style.display = snippet.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function copyCode(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent || element.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const originalText = element.previousElementSibling.textContent;
+                element.previousElementSibling.textContent = 'Copied!';
+                setTimeout(() => {
+                    element.previousElementSibling.textContent = originalText;
+                }, 2000);
+            });
+        }
+        
+        function showTab(tabId) {
+            const tab = document.querySelector(`button[data-bs-target="#${tabId}"]`);
+            if (tab) {
+                const bsTab = new bootstrap.Tab(tab);
+                bsTab.show();
+            }
+        }
+    </script>
+</body>
+</html>
