@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Framework - Learning Hub</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --info-color: #0dcaf0;
+            --custom-color: #6f42c1;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+        
+        .jumbotron {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0a58ca 100%);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .code-example {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .progress-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .customization-demo {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+        
+        .custom-btn {
+            background-color: var(--custom-color);
+            border-color: var(--custom-color);
+        }
+        
+        .custom-btn:hover {
+            background-color: #5a32a8;
+            border-color: #5a32a8;
+        }
+        
+        .nav-tabs .nav-link.active {
+            font-weight: 600;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .component-preview {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+        
+        .checkpoint {
+            background-color: #e7f1ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-radius: 10px 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary">Bootstrap Framework Learning Hub</h1>
+            <p class="lead">Master Bootstrap to build responsive websites and customize it to your liking</p>
+            <div class="progress" style="height: 8px; max-width: 500px; margin: 0 auto;">
+                <div id="learningProgress" class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <p class="mt-2 text-muted"><span id="progressText">25% Complete</span> - Let's continue learning!</p>
+        </header>
+        
+        <!-- Introduction -->
+        <div class="jumbotron">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2 class="display-6">Why Learn Bootstrap?</h2>
+                    <p class="lead">Bootstrap is the world's most popular front-end open source toolkit for building responsive, mobile-first sites. With Bootstrap, you can:</p>
+                    <ul class="mb-0">
+                        <li>Build responsive layouts quickly with its grid system</li>
+                        <li>Use pre-styled components (buttons, cards, navbars, etc.)</li>
+                        <li>Customize everything with Sass variables and mixins</li>
+                        <li>Ensure consistency across browsers and devices</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="bi bi-bootstrap-fill" style="font-size: 8rem; opacity: 0.8;"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lessons Navigation -->
+        <div class="progress-section">
+            <h3 class="mb-4">Learning Path</h3>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="lesson-card card">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-grid-3x3-gap"></i>
+                            </div>
+                            <h5 class="card-title">Grid System</h5>
+                            <p class="card-text">Learn Bootstrap's responsive grid system for creating layouts.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showLesson(1)">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="lesson-card card">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-toggle-on"></i>
+                            </div>
+                            <h5 class="card-title">Components</h5>
+                            <p class="card-text">Master pre-built components like buttons, cards, and navbars.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showLesson(2)">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="lesson-card card">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-palette"></i>
+                            </div>
+                            <h5 class="card-title">Customization</h5>
+                            <p class="card-text">Learn to customize Bootstrap with CSS variables and Sass.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showLesson(3)">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="lesson-card card">
+                        <div class="card-body text-center">
+                            <div class="lesson-icon">
+                                <i class="bi bi-layout-text-sidebar"></i>
+                            </div>
+                            <h5 class="card-title">Utilities</h5>
+                            <p class="card-text">Use utility classes for spacing, colors, display, and more.</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showLesson(4)">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lesson Content Area -->
+        <div id="lessonContent" class="mt-5">
+            <!-- Lesson 1: Grid System -->
+            <div class="lesson-section" id="lesson1">
+                <h2 class="mb-4">Lesson 1: Bootstrap Grid System</h2>
+                
+                <div class="checkpoint">
+                    <h5><i class="bi bi-lightbulb text-warning"></i> Key Concept</h5>
+                    <p>Bootstrap's grid system uses containers, rows, and columns to layout content. It's built with flexbox and is fully responsive.</p>
+                </div>
+                
+                <h4 class="mt-4">How the Grid Works</h4>
+                <p>Bootstrap's grid system divides the screen into 12 columns. You specify how many columns an element should span at different breakpoints.</p>
+                
+                <div class="code-example">
+                    <h6>HTML Structure:</h6>
+                    <pre><code>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-8"&gt;Content (8 columns on medium+)&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;Sidebar (4 columns on medium+)&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                
+                <h4 class="mt-4">Grid Breakpoints</h4>
+                <p>Bootstrap has 6 responsive breakpoints:</p>
+                <ul>
+                    <li><strong>xs</strong> (default): &lt;576px</li>
+                    <li><strong>sm</strong>: ≥576px</li>
+                    <li><strong>md</strong>: ≥768px</li>
+                    <li><strong>lg</strong>: ≥992px</li>
+                    <li><strong>xl</strong>: ≥1200px</li>
+                    <li><strong>xxl</strong>: ≥1400px</li>
+                </ul>
+                
+                <h4 class="mt-4">Live Grid Demo</h4>
+                <p>Resize your browser window to see how the grid responds:</p>
+                <div class="component-preview">
+                    <div class="container-fluid">
+                        <div class="row mb-3">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="p-3 bg-primary text-white text-center rounded">Column 1</div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="p-3 bg-success text-white text-center rounded">Column 2</div>
+                            </div>
+                            <div class="col-md-12 col-lg-4">
+                                <div class="p-3 bg-info text-white text-center rounded">Column 3 (full width on mobile)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-5">
+                    <button class="btn btn-secondary" onclick="markComplete(1)">Mark Complete</button>
+                    <button class="btn btn-primary" onclick="showLesson(2)">Next Lesson →</button>
+                </div>
+            </div>
+            
+            <!-- Lesson 2: Components -->
+            <div class="lesson-section" id="lesson2" style="display: none;">
+                <h2 class="mb-4">Lesson 2: Bootstrap Components</h2>
+                
+                <div class="checkpoint">
+                    <h5><i class="bi bi-lightbulb text-warning"></i> Key Concept</h5>
+                    <p>Bootstrap includes dozens of reusable components built with HTML, CSS, and JavaScript. Understanding these will save you development time.</p>
+                </div>
+                
+                <h4 class="mt-4">Common Components</h4>
+                <p>Here are some of the most frequently used Bootstrap components:</p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h5>Buttons</h5>
+                        <div class="component-preview">
+                            <button type="button" class="btn btn-primary me-2">Primary</button>
+                            <button type="button" class="btn btn-secondary me-2">Secondary</button>
+                            <button type="button" class="btn btn-success me-2">Success</button>
+                            <button type="button" class="btn btn-danger me-2">Danger</button>
+                            <button type="button" class="btn btn-outline-primary me-2">Outline</button>
+                        </div>
+                        
+                        <div class="code-example">
+                            <h6>Button HTML:</h6>
+                            <pre><code>&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-outline-secondary"&gt;Outline&lt;/button&gt;
+&lt;button class="btn btn-success btn-lg"&gt;Large Button&lt;/button&gt;</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5>Cards</h5>
+                        <div class="component-preview">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card Title</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title.</p>
+                                    <a href="#" class="card-link">Card link</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="code-example">
+                            <h6>Card HTML:</h6>
+                            <pre><code>&lt;div class="card"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Card content...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="mt-4">Navigation Components</h4>
+                <div class="component-preview">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="#">Navbar</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Features</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Pricing</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-5">
+                    <button class="btn btn-secondary" onclick="showLesson(1)">← Previous</button>
+                    <button class="btn btn-secondary" onclick="markComplete(2)">Mark Complete</button>
+                    <button class="btn btn-primary" onclick="showLesson(3)">Next Lesson →</button>
+                </div>
+            </div>
+            
+            <!-- Lesson 3: Customization -->
+            <div class="lesson-section" id="lesson3" style="display: none;">
+                <h2 class="mb-4">Lesson 3: Customizing Bootstrap</h2>
+                
+                <div class="checkpoint">
+                    <h5><i class="bi bi-lightbulb text-warning"></i> Key Concept</h5>
+                    <p>Bootstrap is designed to be customizable. You can override its styles, use CSS variables, or modify the Sass source files.</p>
+                </div>
+                
+                <h4 class="mt-4">Customization Methods</h4>
+                
+                <ul class="nav nav-tabs mb-4" id="customizationTabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#cssOverrides">CSS Overrides</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#cssVariables">CSS Variables</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sassCustom">Sass Customization</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="cssOverrides">
+                        <p>Override Bootstrap styles with your own CSS (order matters!):</p>
+                        <div class="code-example">
+                            <h6>Custom CSS File (load after Bootstrap):</h6>
+                            <pre><code>/* Override primary color */
+.btn-primary {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+/* Override navbar background */
+.navbar-light {
+    background-color: #f8f9fa !important;
+    border-bottom: 2px solid #0d6efd;
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="cssVariables">
+                        <p>Bootstrap 5 includes CSS custom properties (variables) for easy theming:</p>
+                        <div class="code-example">
+                            <h6>Using CSS Variables:</h6>
+                            <pre><code>:root {
+    --bs-primary: #6f42c1;
+    --bs-primary-rgb: 111, 66, 193;
+    --bs-body-bg: #f8f9fa;
+    --bs-body-color: #212529;
+    --bs-border-radius: 0.5rem;
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="sassCustom">
+                        <p>For full control, customize Bootstrap's Sass variables before compiling:</p>
+                        <div class="code-example">
+                            <h6>Custom SCSS File:</h6>
+                            <pre><code>// Override default variables
+$primary: #6f42c1;
+$enable-rounded: false;
+$font-size-base: 1.1rem;
+
+// Import Bootstrap
+@import "~bootstrap/scss/bootstrap";</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="mt-4">Live Customization Demo</h4>
+                <p>Try customizing the button below by changing the color values:</p>
+                
+                <div class="customization-demo">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="colorPicker" class="form-label">Button Color:</label>
+                                <input type="color" class="form-control form-control-color" id="colorPicker" value="#6f42c1" title="Choose your color">
+                            </div>
+                            <div class="mb-3">
+                                <label for="borderRadius" class="form-label">Border Radius: <span id="radiusValue">5</span>px</label>
+                                <input type="range" class="form-range" id="borderRadius" min="0" max="20" value="5">
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center justify-content-center">
+                            <button id="customButton" class="btn custom-btn" style="padding: 10px 20px; border-radius: 5px;">
+                                Customized Button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-5">
+                    <button class="btn btn-secondary" onclick="showLesson(2)">← Previous</button>
+                    <button class="btn btn-secondary" onclick="markComplete(3)">Mark Complete</button>
+                    <button class="btn btn-primary" onclick="showLesson(4)">Next Lesson →</button>
+                </div>
+            </div>
+            
+            <!-- Lesson 4: Utilities -->
+            <div class="lesson-section" id="lesson4" style="display: none;">
+                <h2 class="mb-4">Lesson 4: Bootstrap Utility Classes</h2>
+                
+                <div class="checkpoint">
+                    <h5><i class="bi bi-lightbulb text-warning"></i> Key Concept</h5>
+                    <p>Bootstrap includes hundreds of utility classes for quickly styling elements without writing custom CSS.</p>
+                </div>
+                
+                <h4 class="mt-4">Common Utility Classes</h4>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h5>Spacing Utilities</h5>
+                        <p>Use <code>m</code> for margin and <code>p</code> for padding, followed by direction and size.</p>
+                        <div class="component-preview">
+                            <div class="p-3 mb-2 bg-primary text-white">Padding: 3 (p-3)</div>
+                            <div class="m-3 p-3 bg-success text-white">Margin: 3 (m-3)</div>
+                            <div class="mt-4 pt-4 bg-info text-white">Margin-top & padding-top: 4 (mt-4, pt-4)</div>
+                        </div>
+                        
+                        <div class="code-example">
+                            <h6>Spacing Examples:</h6>
+                            <pre><code>&lt;div class="mt-3"&gt;Margin top 1rem&lt;/div&gt;
+&lt;div class="p-4"&gt;Padding 1.5rem&lt;/div&gt;
+&lt;div class="mx-auto"&gt;Center horizontally&lt;/div&gt;</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5>Display & Flex Utilities</h5>
+                        <p>Control display, flexbox, and alignment with utility classes.</p>
+                        <div class="component-preview">
+                            <div class="d-flex justify-content-between mb-2">
+                                <div class="p-2 bg-primary text-white">Flex item 1</div>
+                                <div class="p-2 bg-success text-white">Flex item 2</div>
+                                <div class="p-2 bg-info text-white">Flex item 3</div>
+                            </div>
+                            <div class="d-none d-md-block p-2 bg-warning text-dark">
+                                Visible on medium screens and up
+                            </div>
+                        </div>
+                        
+                        <div class="code-example">
+                            <h6>Display Examples:</h6>
+                            <pre><code>&lt;div class="d-flex"&gt;Flex container&lt;/div&gt;
+&lt;div class="d-none d-md-block"&gt;Hidden on mobile&lt;/div&gt;
+&lt;div class="justify-content-center"&gt;Center content&lt;/div&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="mt-4">Color & Text Utilities</h4>
+                <div class="component-preview">
+                    <p class="text-primary">Primary text</p>
+                    <p class="text-success bg-dark p-2">Success text on dark background</p>
+                    <p class="fw-bold">Bold text</p>
+                    <p class="text-center">Centered text</p>
+                </div>
+                
+                <div class="code-example">
+                    <h6>Text & Color Examples:</h6>
+                    <pre><code>&lt;p class="text-danger fw-bold"&gt;Bold red text&lt;/p&gt;
+&lt;p class="text-center fs-5"&gt;Centered larger text&lt;/p&gt;
+&lt;div class="bg-light text-dark p-3"&gt;Light background&lt;/div&gt;</code></pre>
+                </div>
+                
+                <div class="checkpoint mt-4">
+                    <h5><i class="bi bi-check-circle text-success"></i> Learning Complete!</h5>
+                    <p>You've now covered the essential Bootstrap concepts. The key to mastery is practice. Try building projects and customizing Bootstrap to match your design preferences.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-5">
+                    <button class="btn btn-secondary" onclick="showLesson(3)">← Previous</button>
+                    <button class="btn btn-success" onclick="markComplete(4)">Complete Course</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resources -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h3 class="mb-4">Additional Resources</h3>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Official Documentation</h5>
+                                <p class="card-text">The complete Bootstrap documentation with examples and API references.</p>
+                                <a href="https://getbootstrap.com/docs" target="_blank" class="btn btn-outline-primary">Visit Docs</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Bootstrap Themes</h5>
+                                <p class="card-text">Explore premium and free Bootstrap themes to see customization possibilities.</p>
+                                <a href="https://themes.getbootstrap.com/" target="_blank" class="btn btn-outline-primary">Browse Themes</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Practice Projects</h5>
+                                <p class="card-text">Build real projects to reinforce your Bootstrap skills.</p>
+                                <button class="btn btn-outline-primary" onclick="suggestProjects()">Get Ideas</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Bootstrap Learning Hub</h5>
+                    <p>A comprehensive guide to understanding and customizing the Bootstrap framework.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Created with <i class="bi bi-heart-fill text-danger"></i> for front-end developers</p>
+                    <p class="text-muted">Progress: <span id="footerProgress">25%</span> complete</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Track completed lessons
+        let completedLessons = [1]; // Start with first lesson "viewed"
+        const totalLessons = 4;
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            // Set up event listeners for the customization demo
+            document.getElementById('colorPicker').addEventListener('input', function(e) {
+                const color = e.target.value;
+                document.getElementById('customButton').style.backgroundColor = color;
+                document.getElementById('customButton').style.borderColor = color;
+            });
+            
+            document.getElementById('borderRadius').addEventListener('input', function(e) {
+                const radius = e.target.value + 'px';
+                document.getElementById('customButton').style.borderRadius = radius;
+                document.getElementById('radiusValue').textContent = e.target.value;
+            });
+        });
+        
+        // Show selected lesson
+        function showLesson(lessonNumber) {
+            // Hide all lessons
+            document.querySelectorAll('.lesson-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected lesson
+            document.getElementById(`lesson${lessonNumber}`).style.display = 'block';
+            
+            // Mark as viewed if not already
+            if (!completedLessons.includes(lessonNumber)) {
+                completedLessons.push(lessonNumber);
+                updateProgress();
+            }
+            
+            // Scroll to top of lesson
+            window.scrollTo({
+                top: document.getElementById('lessonContent').offsetTop - 20,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Mark lesson as complete
+        function markComplete(lessonNumber) {
+            if (!completedLessons.includes(lessonNumber)) {
+                completedLessons.push(lessonNumber);
+                updateProgress();
+                
+                // Show success message
+                alert(`Lesson ${lessonNumber} marked as complete!`);
+                
+                // If not the last lesson, go to next
+                if (lessonNumber < totalLessons) {
+                    showLesson(lessonNumber + 1);
+                }
+            }
+        }
+        
+        // Update progress bar and text
+        function updateProgress() {
+            const progress = Math.round((completedLessons.length / totalLessons) * 100);
+            const progressBar = document.getElementById('learningProgress');
+            const progressText = document.getElementById('progressText');
+            const footerProgress = document.getElementById('footerProgress');
+            
+            progressBar.style.width = `${progress}%`;
+            progressBar.setAttribute('aria-valuenow', progress);
+            progressText.textContent = `${progress}% Complete`;
+            footerProgress.textContent = `${progress}%`;
+            
+            // Change color based on progress
+            if (progress < 30) {
+                progressBar.className = 'progress-bar bg-danger';
+            } else if (progress < 70) {
+                progressBar.className = 'progress-bar bg-warning';
+            } else {
+                progressBar.className = 'progress-bar bg-success';
+            }
+        }
+        
+        // Suggest practice projects
+        function suggestProjects() {
+            const projects = [
+                "Portfolio Website: Create a responsive portfolio using Bootstrap components",
+                "E-commerce Product Page: Build a product detail page with cards, modals, and forms",
+                "Admin Dashboard: Create a dashboard with navbar, sidebar, cards, and tables",
+                "Blog Layout: Design a blog with a responsive grid, cards, and pagination",
+                "Landing Page: Build a marketing landing page with a hero section and features grid"
+            ];
+            
+            let projectsHTML = "<h5>Practice Project Ideas</h5><ul class='mb-3'>";
+            projects.forEach(project => {
+                projectsHTML += `<li>${project}</li>`;
+            });
+            projectsHTML += "</ul><p class='mb-0'>Try customizing each project with your own color scheme and components!</p>";
+            
+            // Create and show modal with projects
+            const modalHTML = `
+                <div class="modal fade" id="projectsModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Bootstrap Practice Projects</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                ${projectsHTML}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove existing modal if any
+            const existingModal = document.getElementById('projectsModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Add modal to body and show it
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            const projectsModal = new bootstrap.Modal(document.getElementById('projectsModal'));
+            projectsModal.show();
+        }
+    </script>
+</body>
+</html>
